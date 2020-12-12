@@ -1335,78 +1335,8 @@
 									<b class="arrow"></b>
 								</li>
 					</li> 
-					<?php if(strtolower($hak_akses)=="admin"){?>                     
-					<li class="<?php
-						$segmen = $this->uri->segment(2);
-						$temp = explode("_",$segmen);						
-						if($temp[0]=="tu")echo "active open";
-					?>">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text"> Tata Usaha </span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-                                                
-						<ul class="submenu">
-							<li class="<?php
-						if($this->uri->segment(2)=="tu_ekin")echo "active"
-					?>">
-								<a href="<?=site_url("tu/tu_ekin")?>">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Rekap e-Kinerja 
-								</a>
-
-								<b class="arrow"></b>
-							</li>	
-                                                        <li class="<?php
-						if($this->uri->segment(2)=="tu_pgw")echo "active"
-					?>">
-								<a href="<?=site_url("tu/tu_pgw")?>">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Data Pegawai 
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-                                                        <li class="<?php
-						//if($this->uri->segment(2)=="tu_ekin")echo "active"
-					?>">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Persuratan (coming soon) 
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-                                                        <li class="<?php
-						//if($this->uri->segment(2)=="tu_ekin")echo "active"
-					?>">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									S P J (coming soon) 
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-                                                        <li class="<?php
-						//if($this->uri->segment(2)=="tu_ekin")echo "active"
-					?>">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Penganggaran/RKAKL (coming soon) 
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-<!-- ----------------------------------------End of Tata Usaha--------------------------- -->                                                
-
-					</li>
-
-					<?php }?>                     
+				                  
+	                    
 					<!--<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
