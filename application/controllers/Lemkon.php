@@ -1886,9 +1886,9 @@ public function index(){
                 $crud->add_action('Reset Password', '', 'lemkon/resetPass','ui-icon-image');
                                         
                 $crud->set_relation('id_lk', 'informasi_lk_umum', 'nama_lk');
-                    
+                $crud->set_relation('id_prov', 'provinsi', 'nama_prov');     
                 $crud->field_type('password', 'hidden');
-                $crud->field_type('hak_akses','dropdown',array('ADMIN' => 'Admin', 'USER' => 'user'));
+                $crud->field_type('hak_akses','dropdown',array('SUPER AMDIN' => 'Super Admin','ADMIN' => 'Admin', 'USER' => 'User'));
                     //$crud->field_type('username', 'hidden');
                 $crud->callback_before_insert(array($this,'generateKey'));
                 $crud->callback_before_insert(array($this,'generateMd5'));
@@ -1904,9 +1904,13 @@ public function index(){
                     //$crud->set_rules('nama','nama','required|alpha');
                                         
                 $crud->display_as('ID_INSTANSI','INSTANSI')
-                ->display_as('id_lk','Asal Lembaga Konservasi');	    	
+                ->display_as('id_lk','Asal Lembaga Konservasi');
+                
+                   $crud->display_as('ID_PROV','PROVINSI')
+                ->display_as('id_prov','Provinsi');
                                 
-                $output = $crud->render();        
+                $output = $crud->render();
+                 
                 $this->displayCRUD($output);
                     }catch(Exception $e){
                 show_error($e->getMessage().' --- '.$e->getTraceAsString());
