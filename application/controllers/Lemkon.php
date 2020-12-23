@@ -1367,32 +1367,25 @@ public function currencyFormat($value, $row=null){
                 try{
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
-                $crud->set_table('data_individu_satwa');
+                $crud->set_table('data_kematian_satwa_new');
 
                 $crud->fields('informasi_lk_umum_id_lk',
                                     'master_satwa_nama_latin',
-                                    'nama_panggilan_satwa',
+                                    'no_identifikasi',
                                     'tanggal_kematian',
-                                    'penyebab_kematian',  
-                                    'nekropsi',                                  
-                                    'upload_bap_kematian',                                    
-                                    'upload_foto_utuh_kematian',
-                                    'upload_foto_spesifik_kematian');
+                                    'master_jenis_kematian_id_jenis_kematian',
+                                    'upload_bap');
 
-                $crud->display_as("nekropsi","Laporan Hasil Nekropsi");
+                //$crud->display_as("nekropsi","Laporan Hasil Nekropsi");
 
-                $crud->set_field_upload('nekropsi','assets/uploads/lk/nekropsi');
+                $crud->set_field_upload('upload_bap','assets/uploads/lk/bapmati');
 
                 $crud->columns('informasi_lk_umum_id_lk',
                 'master_satwa_nama_latin',
-                'nama_panggilan_satwa',
+                'no_identifikasi',
                 'tanggal_kematian',
-                'penyebab_kematian',                                    
-                'nekropsi',
-                'upload_bap_kematian',                
-                'upload_foto_utuh_kematian',
-                'upload_foto_spesifik_kematian'                
-                );
+                'master_jenis_kematian_id_jenis_kematian',
+                'upload_bap'  );
 
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
@@ -1406,25 +1399,18 @@ public function currencyFormat($value, $row=null){
 
                 //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                
                 $crud->set_relation("master_satwa_nama_latin","master_satwa","{jenis_satwa} - {nama_latin}");  
-                $crud->set_relation("penyebab_kematian","master_sebab_mati","nama_sebab");                
-
+                $crud->set_relation("master_jenis_kematian_id_jenis_kematian","master_sebab_mati","nama_sebab");                
+                $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");  
                 //harus ada session LK - warning
                 //$crud->set_relation("nama_induk_jantan","data_individu_satwa","nama_panggilan_satwa",array('master_jenis_kelamin_id_jenis_kelamin' => 'J', 'informasi_lk_umum_id_lk' => 'TSII'), 'nama_panggilan_satwa ASC');
                 //$crud->set_relation("nama_induk_betina","data_individu_satwa","nama_panggilan_satwa",array('master_jenis_kelamin_id_jenis_kelamin' => 'B', 'informasi_lk_umum_id_lk' => 'TSII'), 'nama_panggilan_satwa ASC');
 
                 $crud->display_as("informasi_lk_umum_id_lk","Nama LK")                
-                ->display_as("master_satwa_nama_latin","Nama Latin")                
+                ->display_as("master_satwa_nama_latin","Nama Latin")     
+                ->display_as("master_jenis_kematian_id_jenis_kematian","Penyebab Kematian")             
                 ;
 
-                $crud->set_field_upload('upload_bap_kematian','assets/uploads/lk/bapmati');
-                $crud->set_field_upload('upload_foto_utuh_kematian','assets/uploads/lk/fumati');
-                $crud->set_field_upload('upload_foto_spesifik_kematian','assets/uploads/lk/fsmati');
-
-                $crud->unset_add();
-
-                $crud->change_field_type('informasi_lk_umum_id_lk', 'readonly');
-                $crud->change_field_type('master_satwa_nama_latin', 'readonly');
-                $crud->change_field_type('nama_panggilan_satwa', 'readonly');
+             
                 
                 $output = $crud->render();                        
                 $this->displayCRUD($output);
