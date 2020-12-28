@@ -1152,95 +1152,55 @@ public function currencyFormat($value, $row=null){
                 try{
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
-                $crud->set_table('pelepasliaran');
+                $crud->set_table('pelepasan_satwa_new');
                 
                 //warningg tambahin where dr LK session
                 
                 $crud->set_relation("id_kawasan","master_kawasan","nama_kawasan");
-                
-                $crud->display_as("data_individu_satwa_informasi_lk_umum_id_lk","Nama LK")
-                //->display_as("data_individu_satwa_no_identifikasi","No Identifikasi")
-                ->display_as("data_individu_satwa_master_satwa_nama_latin","Nama Satwa")   
-                ->display_as("upload_satdan","Upload SAT-DN") 
-                ->display_as("provinsi_id_prov", "Provinsi Pelepasan")                    
-                ->display_as("kabupaten_id_kab", "Kabupaten Pelepasan")                    
-                ->display_as("kecamatan_id_kecamatan", "Kecamatan Pelepasan")                    
-                ->display_as("kelurahan_id_lurah", "Kelurahan Pelepasan")                    
-                ->display_as("latitude", "Latitude (decimal format)")                    
-                ->display_as("longitude", "Longitude (decimal format)")  
-                ->display_as("id_kawasan", "Kawasan")                    
-                ;
-
+                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");  
+                $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");  
                 $crud->field_type('id_pelepasliaran', 'hidden');
 
-                $crud->unset_columns(//"kelurahan_id_lurah",
-                //"kecamatan_id_kecamatan",
-                "upload_satdan",
-                "upload_persetujan_dj",
-                "upload_foto_utuh",
-                "upload_foto_spesifik",
-                "id_pelepasliaran"
-                );
-
-                $crud->set_rules('latitude','Latitude (decimal format)','decimal');
-                $crud->set_rules('longitude','Latitude (decimal format)','decimal');
-
-                $crud->callback_before_insert(array($this,'pelepasliaran_callback'));
-                $crud->callback_before_update(array($this,'pelepasliaran_callback'));
-
-                $crud->set_field_upload('upload_satdan','assets/uploads/lk/satdnlepas');
-                $crud->set_field_upload('upload_persetujan_dj','assets/uploads/lk/djlepas');
-                $crud->set_field_upload('upload_foto_utuh','assets/uploads/lk/fulepas');
-                $crud->set_field_upload('upload_foto_spesifik','assets/uploads/lk/fslepas');
-
+                
+                $crud->set_field_upload('upload_sk_pelepasan','assets/uploads/lk/fulepas');
+                
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
-                    $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
-                    $crud->where("informasi_lk_umum_id_lk", $this->id_lk);
-                    $crud->set_relation("data_individu_satwa_master_satwa_nama_latin","data_individu_satwa","{nama_panggilan_satwa} - {informasi_lk_umum_id_lk}/{master_satwa_nama_latin}", array('informasi_lk_umum_id_lk' => $this->id_lk));                                
+                    $crud->field_type('lk_asal_informasi_lk_umum_kode_lk', 'hidden', $this->id_lk);
+                    $crud->where("lk_asal_informasi_lk_umum_kode_lk", $this->id_lk);
+                                                  
                     //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk", "");
                 }
                 else{
-                    $crud->set_relation("data_individu_satwa_master_satwa_nama_latin","data_individu_satwa","{nama_panggilan_satwa} - {informasi_lk_umum_id_lk}/{master_satwa_nama_latin}");                                
+                    $crud->set_relation("lk_asal_informasi_lk_umum_kode_lk", "informasi_lk_umum", "nama_lk");
                     //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                    
                 }
 
-                $crud->set_relation("provinsi_id_prov", "provinsi", "nama_prov");
-                $crud->set_relation("kabupaten_id_kab", "kabupaten", "nama_kab");
-                $crud->set_relation("kecamatan_id_kecamatan", "kecamatan", "nama_kecamatan");
-                $crud->set_relation("kelurahan_id_lurah", "kelurahan", "nama_lurah");
+             
 
                 $this->load->library('gc_dependent_select');
                 
                 $fields = array(
-                        'provinsi_id_prov' => array(// first dropdown name
-                        'table_name' => 'provinsi', // table of country
-                        'title' => 'nama_prov', // country title
-                        'relate' => null, // the first dropdown hasn't a relation
-                        'data-placeholder' => 'Pilih Provinsi'
-                        ),
-                        'kabupaten_id_kab' => array(// second dropdown name
-                        'table_name' => 'kabupaten', // table of state
-                        'title' => 'nama_kab', // state title
-                        'id_field' => 'id_kab', // table of state: primary key
-                        'relate' => 'provinsi_id_prov', // table of state:
-                        'data-placeholder' => 'Pilih Kabupaten/Kota' //dropdown's data-placeholder:
-                        ),                        
-                        'kecamatan_id_kecamatan' => array(// second dropdown name
-                        'table_name' => 'kecamatan', // table of state
-                        'title' => 'nama_kecamatan', // state title
-                        'id_field' => 'id_kecamatan', // table of state: primary key
-                        'relate' => 'kabupaten_id_kab', // table of state:
-                        'data-placeholder' => 'Pilih Kecamatan' //dropdown's data-placeholder:
-                        ),                    
-                        'kelurahan_id_lurah' => array(// second dropdown name
-                        'table_name' => 'kelurahan', // table of state
-                        'title' => 'nama_lurah', // state title
-                        'id_field' => 'id_lurah', // table of state: primary key
-                        'relate' => 'kecamatan_id_kecamatan', // table of state:
-                        'data-placeholder' => 'Pilih Kelurahan/Desa' //dropdown's data-placeholder:
-                        ),
-                    );
+                    'lk_asal_informasi_lk_umum_kode_lk' => array(// first dropdown name
+                    'table_name' => 'informasi_lk_umum', // table of country
+                    'title' => 'nama_lk', // country title
+                    'relate' => null, // the first dropdown hasn't a relation
+                    ),
+                    'master_satwa_nama_latin' => array(// second dropdown name
+                        'table_name' => 'data_individu_satwa_new', // table of state
+                        'title'=>'master_satwa_nama_latin',
+                        'id_field' => 'id_individu_satwa', // table of state: primary key
+                        'relate' => 'informasi_lk_umum_id_lk', // table of state:
+                        'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                    ),
+                    'no_identifikasi' => array(// second dropdown name
+                        'table_name' => 'data_individu_satwa_new', // table of state
+                        'title'=>'no_identifikasi',
+                        'id_field' => 'id_individu_satwa', // table of state: primary key
+                        'relate' => 'id_individu_satwa', // table of state:
+                        'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                    )
+                );
                 
                 $config = array(
                             'main_table' => 'pelepasliaran',
