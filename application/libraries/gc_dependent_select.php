@@ -100,6 +100,7 @@ class gc_dependent_select
 	    }
 	    $i++;
 	}
+	
 	$where  = array($this->fields[$field_info->name]['relate'] => $this->data[$parent['field']]);
 	$this->ci->db->select("*")
 		->from($field_info->extras[1])
@@ -256,6 +257,7 @@ class gc_dependent_select
 
     public function get_json()
     {
+		
 	if (empty($this->fields[$this->field_name]))
 	    die();
 
@@ -268,6 +270,7 @@ class gc_dependent_select
 	$this->ci->db->select("*")
 		->from($this->fields[$this->field_name]['table_name'])
 		->where($this->fields[$this->field_name]['relate'], $this->id);
+		
 	if (!empty($this->fields[$this->field_name]['where']))
 	{
 	    $this->ci->db->where($this->fields[$this->field_name]['where'], null, FALSE);

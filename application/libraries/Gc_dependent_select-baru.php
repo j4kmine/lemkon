@@ -57,7 +57,7 @@ class Gc_dependent_select
 
     protected function get_items()
     {
-
+        
         if (in_array($this->segment_name, $this->segments)) {
 
             if (count($this->segments) >= (array_search($this->segment_name, $this->segments) + 2)) {
@@ -65,7 +65,7 @@ class Gc_dependent_select
                 $this->field_name = $this->get_field_name();
 
                 $this->id = $this->get_id_value();
-
+            
                 if (empty($this->id) || empty($this->field_name)) {
                     throw new Exception('Your data is damaged');
                 }

@@ -1361,60 +1361,71 @@ public function currencyFormat($value, $row=null){
             $this->load->view("MstInstansiView", $req);
             $this->load->view("footer");
         }
+        function id_kematian_satwa_callback($post_array){
+            $post_array['id_kematian_satwa'] = $post_array['informasi_lk_umum_id_lk']."-".$post_array['master_satwa_nama_latin']."-".$post_array['no_identifikasi'];  
+            $post_array['id_kematian_satwa'] = str_replace("/","_",$post_array['id_kematian_satwa']);
+            $post_array['id_kematian_satwa'] = str_replace(" ","-",$post_array['id_kematian_satwa']);
+                
 
+            return $post_array;
+        }
         public function kematian_satwa_ctl(){
             
                 try{
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_kematian_satwa_new');
-
-                $crud->fields('informasi_lk_umum_id_lk',
-                                    'master_satwa_nama_latin',
-                                    'no_identifikasi',
-                                    'tanggal_kematian',
-                                    'master_jenis_kematian_id_jenis_kematian',
-                                    'upload_bap');
-
-                //$crud->display_as("nekropsi","Laporan Hasil Nekropsi");
-
                 $crud->set_field_upload('upload_bap','assets/uploads/lk/bapmati');
-
+                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");  
+                $crud->set_relation("master_jenis_kematian_id_jenis_kematian","master_sebab_mati","nama_sebab");                
+                $crud->set_relation("no_identifikasi_kematian","data_individu_satwa_new","no_identifikasi");  
                 $crud->columns('informasi_lk_umum_id_lk',
                 'master_satwa_nama_latin',
-                'no_identifikasi',
+                'no_identifikasi_kematian',
                 'tanggal_kematian',
                 'master_jenis_kematian_id_jenis_kematian',
                 'upload_bap'  );
-
+                $this->load->library('gc_dependent_select');
                 if($this->hakAkses=="user"){               
-                    //$crud->unset_fields("id_lk");
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
                     $crud->where("data_individu_satwa.informasi_lk_umum_id_lk", $this->id_lk);
-                    //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk", "");
                 }
                 else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                    
                 }
-
-                //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                
-                $crud->set_relation("master_satwa_nama_latin","master_satwa","{jenis_satwa} - {nama_latin}");  
-                $crud->set_relation("master_jenis_kematian_id_jenis_kematian","master_sebab_mati","nama_sebab");                
-                $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");  
-                //harus ada session LK - warning
-                //$crud->set_relation("nama_induk_jantan","data_individu_satwa","nama_panggilan_satwa",array('master_jenis_kelamin_id_jenis_kelamin' => 'J', 'informasi_lk_umum_id_lk' => 'TSII'), 'nama_panggilan_satwa ASC');
-                //$crud->set_relation("nama_induk_betina","data_individu_satwa","nama_panggilan_satwa",array('master_jenis_kelamin_id_jenis_kelamin' => 'B', 'informasi_lk_umum_id_lk' => 'TSII'), 'nama_panggilan_satwa ASC');
-
+                $crud->field_type('id_kematian_satwa', 'hidden');
                 $crud->display_as("informasi_lk_umum_id_lk","Nama LK")                
-                ->display_as("master_satwa_nama_latin","Nama Latin")     
+                ->display_as("master_satwa_nama_latin","Jenis Satwa")     
                 ->display_as("master_jenis_kematian_id_jenis_kematian","Penyebab Kematian")             
                 ;
-
-             
+                $crud->callback_before_insert(array($this,'id_kematian_satwa_callback'));
+                $fields = array(
+                        'master_satwa_nama_latin' => array(// first dropdown name
+                        'table_name' => 'data_individu_satwa_new', // table of country
+                        'title' => 'master_satwa_nama_latin', // country title
+                        'relate' => null, // the first dropdown hasn't a relation
+                        'data-placeholder' => 'Pilih Jenis Satwa'
+                        ),
+                        'no_identifikasi_kematian' => array(// second dropdown name
+                        'table_name' => 'data_individu_satwa_new', // table of state
+                        'title'=>'no_identifikasi',
+                        'id_field' => 'id_individu_satwa', // table of state: primary key
+                        'relate' => 'id_individu_satwa', // table of state:
+                        'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                        )
+                );
                 
-                $output = $crud->render();                        
+                $config = array(
+                    'main_table' => 'data_kematian_satwa_new',
+                    'main_table_primary' => 'id_kematian_satwa',
+                    "url" => base_url() .'/index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
+                    'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                );
+                $categories = new gc_dependent_select($crud, $fields, $config);
+                $js = $categories->get_js();
+                $output = $crud->render();        
+                $output->output.= $js;
                 $this->displayCRUD($output);
-
                 }catch(Exception $e){
                     show_error($e->getMessage().' --- '.$e->getTraceAsString());
                 }
@@ -1591,7 +1602,7 @@ public function currencyFormat($value, $row=null){
                 else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");
                 }
-                $crud->field_type('kondisi_satwa','dropdown',array('SUPER AMDIN' => 'Super Admin','ADMIN' => 'Admin', 'USER' => 'User'));
+                $crud->field_type('kondisi_satwa','dropdown',array('HIDUP' => 'Hidup','DIAWETKAN' => 'Diawetkan'));
                 $crud->set_relation("master_status_konservasi_satwa_id_status","master_status_konservasi_satwa","nama_status");
                 $crud->set_relation("master_status_hukum_satwa_id_status","master_status_hukum_satwa","nama_status");
                
