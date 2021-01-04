@@ -29,46 +29,46 @@
                     }
                 
                 ?>
-		<title><?=$title?></title>
+		<title><?php echo $title?></title>
 
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 		
 
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/fonts.googleapis.com.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/fonts.googleapis.com.css" />
 
 		<!-- ace styles -->
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/chosen.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/chosen.min.css" />
 
 		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+			<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/ace-skins.min.css" />
-		<link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/ace-rtl.min.css" />
 
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="<?=base_url()."html/"?>assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="<?php echo base_url()."html/"?>assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
-		<script src="<?=base_url()."html/"?>assets/js/ace-extra.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/ace-extra.min.js"></script>
 
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>
-		<script src="<?=base_url()."html/"?>assets/js/html5shiv.min.js"></script>
-		<script src="<?=base_url()."html/"?>assets/js/respond.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/html5shiv.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/respond.min.js"></script>
 		<![endif]-->
 		
 		<!-- GROCERY CRUD -->
@@ -76,18 +76,18 @@
 		<!-- GROCERY CRUD -->
 		
 		<!--[if !IE]> -->
-		<script src="<?=base_url()."html/"?>assets/js/jquery-2.1.4.min.js"></script>
-		<script src="<?=base_url()."html/"?>assets/js/chosen.jquery.min.js"></script>
-		<script src="<?=base_url()."html/"?>assets/js/loadingoverlay.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/jquery-2.1.4.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/chosen.jquery.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/loadingoverlay.min.js"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="<?=base_url()."html/"?>assets/js/jquery-1.11.3.min.js"></script>
+<script src="<?php echo base_url()."html/"?>assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="<?=base_url()."html/"?>assets/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/bootstrap.min.js"></script>
 		<style>
 			.chosen-container{
 				width: inherit !important;
@@ -113,8 +113,8 @@
 						<small>
 							
 							
-							<div style="display: inline-block;"><img src="<?echo base_url();?>/html/logo-lemkon.png" style="width: 50px;"></div>
-							<div style="display: inline-block;"><?=$title?></div>
+							<div style="display: inline-block;"><img src="<?php echo base_url();?>/html/logo-lemkon.png" style="width: 50px;"></div>
+							<div style="display: inline-block;"><?php echo $title?></div>
 						</small>
 					</a>
 				</div>
@@ -122,7 +122,7 @@
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
 					<li>
-					<a href="<?=site_url('login/logout')?>">
+					<a href="<?php echo site_url('login/logout')?>">
 						<i class="ace-icon fa fa-power-off"></i>
 						Logout
 					</a>
@@ -290,7 +290,7 @@
 									<ul class="dropdown-menu dropdown-navbar">
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?=base_url()."html/"?>assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+												<img src="<?php echo base_url()."html/"?>assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Alex:</span>
@@ -307,7 +307,7 @@
 
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?=base_url()."html/"?>assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+												<img src="<?php echo base_url()."html/"?>assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Susan:</span>
@@ -324,7 +324,7 @@
 
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?=base_url()."html/"?>assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+												<img src="<?php echo base_url()."html/"?>assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Bob:</span>
@@ -341,7 +341,7 @@
 
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?=base_url()."html/"?>assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+												<img src="<?php echo base_url()."html/"?>assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Kate:</span>
@@ -358,7 +358,7 @@
 
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?=base_url()."html/"?>assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+												<img src="<?php echo base_url()."html/"?>assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Fred:</span>
@@ -386,7 +386,7 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<?=base_url()."html/"?>assets/images/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="<?php echo base_url()."html/"?>assets/images/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -468,7 +468,7 @@
 				<ul class="nav nav-list">
 					<li class="">
                                             
-						<a href="<?=$dashboardLink?>">
+						<a href="<?php echo $dashboardLink?>">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
@@ -704,7 +704,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_Amo")echo "active"
 					?>">
-								<a href="<?=site_url("main/monitoring_Amo")?>">
+								<a href="<?php echo site_url("main/monitoring_Amo")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Amunisi
 								</a>
@@ -715,7 +715,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_BAP")echo "active"
 					?>">
-								<a href="<?=site_url("main/monitoring_BAP")?>">
+								<a href="<?php echo site_url("main/monitoring_BAP")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									B A P
 								</a>
@@ -726,7 +726,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_Senpi")echo "active"
 					?>">
-								<a href="<?=site_url("main/monitoring_Senpi")?>">
+								<a href="<?php echo site_url("main/monitoring_Senpi")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									SENPI
 								</a>
@@ -737,7 +737,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_mutasiSenpi")echo "active"
 					?>">
-								<a href="<?=site_url("main/monitoring_mutasiSenpi")?>">
+								<a href="<?php echo site_url("main/monitoring_mutasiSenpi")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Mutasi SENPI
 								</a>
@@ -772,7 +772,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_profil_perusahaan")echo "active"
 					?>">
-								<a href="<?=site_url("php/monitoring_profil_perusahaan")?>">
+								<a href="<?php echo site_url("php/monitoring_profil_perusahaan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Profil Tersangka
 								</a>
@@ -783,7 +783,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_kasus")echo "active"
 					?>">
-								<a href="<?=site_url("php/monitoring_kasus")?>">
+								<a href="<?php echo site_url("php/monitoring_kasus")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Monitoring Kasus
 								</a>
@@ -794,7 +794,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_barang_bukti")echo "active"
 					?>">
-								<a href="<?=site_url("php/monitoring_barang_bukti")?>">
+								<a href="<?php echo site_url("php/monitoring_barang_bukti")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Barang Bukti
 								</a>
@@ -805,7 +805,7 @@
 							<!--li class="<?php 
 						if($this->uri->segment(2)=="monitoring_pnbp")echo "active"
 					?>">
-								<a href="<?=site_url("php/monitoring_pnbp")?>">
+								<a href="<?php echo site_url("php/monitoring_pnbp")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									P N B P
 								</a>
@@ -817,7 +817,7 @@
 						if($this->uri->segment(2)=="monitoring_mutasiSenpi")echo "active"
 
 						?>">
-								<a href="<?=site_url("main/monitoring_mutasiSenpi")?>">
+								<a href="<?php echo site_url("main/monitoring_mutasiSenpi")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Mutasi SENPI
 								</a>
@@ -852,7 +852,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_informasi_lk_umum")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/monitoring_informasi_lk_umum")?>">
+								<a href="<?php echo site_url("lemkon/monitoring_informasi_lk_umum")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Informasi LK Umum
 								</a>
@@ -863,7 +863,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="monitoring_investasi")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/monitoring_investasi")?>">
+								<a href="<?php echo site_url("lemkon/monitoring_investasi")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Monitoring Investasi
 								</a>
@@ -885,7 +885,7 @@
 									<li class="<?php
 								if($this->uri->segment(2)=="monitoring_individu_satwa")echo "active"
 							?>">
-										<a href="<?=site_url("lemkon/monitoring_individu_satwa")?>">
+										<a href="<?php echo site_url("lemkon/monitoring_individu_satwa")?>">
 											<i class="menu-icon"></i>
 											Data Individu Satwa
 										</a>
@@ -897,7 +897,7 @@
 								if($this->uri->segment(2)=="monitoring_kelahiran_satwa")echo "active"
 
 								?>">
-										<a href="<?=site_url("lemkon/monitoring_kelahiran_satwa")?>">
+										<a href="<?php echo site_url("lemkon/monitoring_kelahiran_satwa")?>">
 											<i class="menu-icon"></i>
 											Kelahiran Satwa
 										</a>
@@ -909,7 +909,7 @@
 								if($this->uri->segment(2)=="monitoring_kematian_satwa")echo "active"
 
 								?>">
-										<a href="<?=site_url("lemkon/monitoring_kematian_satwa")?>">
+										<a href="<?php echo site_url("lemkon/monitoring_kematian_satwa")?>">
 											<i class="menu-icon"></i>
 											Kematian Satwa
 										</a>
@@ -920,7 +920,7 @@
 									<li class="<?php 
 								if($this->uri->segment(2)=="monitoring_perolehan_satwa")echo "active"
 							?>">
-										<a href="<?=site_url("lemkon/monitoring_perolehan_satwa")?>">
+										<a href="<?php echo site_url("lemkon/monitoring_perolehan_satwa")?>">
 											<i class="menu-icon"></i>
 											Perolehan Satwa
 										</a>
@@ -931,7 +931,7 @@
 									<li class="<?php 
 								if($this->uri->segment(2)=="monitoring_pelepasliaran")echo "active"
 							?>">
-										<a href="<?=site_url("lemkon/monitoring_pelepasliaran")?>">
+										<a href="<?php echo site_url("lemkon/monitoring_pelepasliaran")?>">
 											<i class="menu-icon"></i>
 											Pelepasliaran
 										</a>
@@ -955,7 +955,7 @@
 									<li class="<?php 
 							if($this->uri->segment(2)=="monitoring_satwa_kelompok")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/monitoring_satwa_kelompok")?>">
+									<a href="<?php echo site_url("lemkon/monitoring_satwa_kelompok")?>">
 										<i class="menu-icon"></i>
 										Data Satwa Berkelompok
 									</a>
@@ -965,7 +965,7 @@
 									<li class="<?php 
 							if($this->uri->segment(2)=="monitoring_kelahiran_unindef")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/monitoring_kelahiran_unindef")?>">
+									<a href="<?php echo site_url("lemkon/monitoring_kelahiran_unindef")?>">
 										<i class="menu-icon"></i>
 										Kelahiran Satwa Berkelompok
 									</a>
@@ -975,7 +975,7 @@
 									<li class="<?php 
 							if($this->uri->segment(2)=="monitoring_kematian_unindef")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/monitoring_kematian_unindef")?>">
+									<a href="<?php echo site_url("lemkon/monitoring_kematian_unindef")?>">
 										<i class="menu-icon"></i>
 										Kematian Satwa Berkelompok
 									</a>
@@ -985,7 +985,7 @@
 									<li class="<?php 
 							if($this->uri->segment(2)=="monitoring_perolehan_unindef")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/monitoring_perolehan_unindef")?>">
+									<a href="<?php echo site_url("lemkon/monitoring_perolehan_unindef")?>">
 										<i class="menu-icon"></i>
 										Perolehan Satwa Berkelompok
 									</a>
@@ -995,7 +995,7 @@
 									<li class="<?php 
 							if($this->uri->segment(2)=="monitoring_pelepasliaran_unindef")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/monitoring_pelepasliaran_unindef")?>">
+									<a href="<?php echo site_url("lemkon/monitoring_pelepasliaran_unindef")?>">
 										<i class="menu-icon"></i>
 										Pelepasliaran Satwa Berkelompok
 									</a>
@@ -1052,7 +1052,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_instansi")echo "active"
 					?>">
-								<a href="<?=site_url("main/mst_instansi")?>">
+								<a href="<?php echo site_url("main/mst_instansi")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Data Instansi 
 								</a>
@@ -1063,7 +1063,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_kondisiBrg")echo "active"
 					?>">
-								<a href="<?=site_url("main/mst_kondisiBrg")?>">
+								<a href="<?php echo site_url("main/mst_kondisiBrg")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Kondisi Barang
 								</a>
@@ -1073,7 +1073,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_jenisSenjata")echo "active"
 					?>">
-								<a href="<?=site_url("main/mst_jenisSenjata")?>">
+								<a href="<?php echo site_url("main/mst_jenisSenjata")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Jenis Senjata
 								</a>
@@ -1091,7 +1091,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_kategori_perusahaan")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_kategori_perusahaan")?>">
+								<a href="<?php echo site_url("php/mst_kategori_perusahaan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Kategori Perusahaan
 								</a>
@@ -1102,7 +1102,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_peran")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_peran")?>">
+								<a href="<?php echo site_url("php/mst_peran")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Peran php
 								</a>
@@ -1112,7 +1112,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_tahapan")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_tahapan")?>">
+								<a href="<?php echo site_url("php/mst_tahapan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tahapan PHP
 								</a>
@@ -1122,7 +1122,7 @@
                             <li class="<?php
 						if($this->uri->segment(2)=="mst_tipologi_kasus")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_tipologi_kasus")?>">
+								<a href="<?php echo site_url("php/mst_tipologi_kasus")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tipologi Kasus
 								</a>
@@ -1133,7 +1133,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="mst_satuan")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_satuan")?>">
+								<a href="<?php echo site_url("php/mst_satuan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Satuan Barang
 								</a>
@@ -1162,7 +1162,7 @@
                                                         <li class="<?php
 						if($this->uri->segment(2)=="mst_upass")echo "active"
 					?>">
-								<a href="<?=site_url("php/mst_upass")?>">
+								<a href="<?php echo site_url("php/mst_upass")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Ubah Password
 								</a>
@@ -1179,7 +1179,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_bentuk_lk")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_bentuk_lk")?>">
+								<a href="<?php echo site_url("lemkon/master_bentuk_lk")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Bentuk LK
 								</a>
@@ -1190,7 +1190,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_institusi_lk")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_institusi_lk")?>">
+								<a href="<?php echo site_url("lemkon/master_institusi_lk")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Institusi LK
 								</a>
@@ -1201,7 +1201,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_perolehan")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_perolehan")?>">
+								<a href="<?php echo site_url("lemkon/master_perolehan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Perolehan
 								</a>
@@ -1212,7 +1212,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_taksa")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_taksa")?>">
+								<a href="<?php echo site_url("lemkon/master_taksa")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Taksa
 								</a>
@@ -1223,7 +1223,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_status_konservasi_satwa")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_status_konservasi_satwa")?>">
+								<a href="<?php echo site_url("lemkon/master_status_konservasi_satwa")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Status Konservasi Satwa
 								</a>
@@ -1234,7 +1234,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_kawasan_hutan")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_kawasan_hutan")?>">
+								<a href="<?php echo site_url("lemkon/master_kawasan_hutan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Kawasan Hutan
 								</a>
@@ -1245,7 +1245,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_status_hukum_satwa")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_status_hukum_satwa")?>">
+								<a href="<?php echo site_url("lemkon/master_status_hukum_satwa")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Status Hukum Satwa
 								</a>
@@ -1256,7 +1256,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_satwa")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_satwa")?>">
+								<a href="<?php echo site_url("lemkon/master_satwa")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Satwa
 								</a>
@@ -1267,7 +1267,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_jenis_kelamin")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_jenis_kelamin")?>">
+								<a href="<?php echo site_url("lemkon/master_jenis_kelamin")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Jenis Kelamin
 								</a>
@@ -1277,7 +1277,7 @@
                             <li class="<?php
 						if($this->uri->segment(2)=="master_kejadian")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_kejadian")?>">
+								<a href="<?php echo site_url("lemkon/master_kejadian")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Kejadian
 								</a>
@@ -1287,7 +1287,7 @@
 							<li class="<?php
 						if($this->uri->segment(2)=="master_sebab_mati")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_sebab_mati")?>">
+								<a href="<?php echo site_url("lemkon/master_sebab_mati")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Penyebab Kematian
 								</a>
@@ -1298,7 +1298,7 @@
 							<!--li class="<?php
 						if($this->uri->segment(2)=="master_perolehan")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_perolehan")?>">
+								<a href="<?php echo site_url("lemkon/master_perolehan")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Master Perolehan
 								</a>
@@ -1309,7 +1309,7 @@
                                                         <li class="<?php
 						if($this->uri->segment(2)=="master_member")echo "active"
 					?>">
-								<a href="<?=site_url("lemkon/master_member")?>">
+								<a href="<?php echo site_url("lemkon/master_member")?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Member
 								</a>
@@ -1327,7 +1327,7 @@
 					<li class="<?php
 						if($this->uri->segment(2)=="mst_upass")echo "active"
 						?>">
-									<a href="<?=site_url("lemkon/mst_upass")?>">
+									<a href="<?php echo site_url("lemkon/mst_upass")?>">
 										<i class="menu-icon fa fa-caret-right"></i>
 										Ubah Password
 									</a>
@@ -1531,7 +1531,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="<?=$dashboardLink?>">Dashboard</a>
+								<a href="<?php echo $dashboardLink?>">Dashboard</a>
 							</li>
 							<!--
 							<li>

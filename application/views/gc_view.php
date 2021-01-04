@@ -11,7 +11,16 @@
 
     <script type="text/javascript">
 			jQuery(function($) {
-                                           
+                   
+                $('select').on('change', function() {
+                    if(this.value  == "TITIP"){
+                        $("div#nomer_sk_field_box").hide();
+                        $("div#pdf_upload_sk_field_box").hide();
+                    }else if(this.value == "KOLEK"){
+                        $("div#nomer_sk_field_box").show();
+                        $("div#pdf_upload_sk_field_box").show();
+                    }
+                });                
             });
             $( document ).ready(function() {
                 //$("#field-tersangka").val("unkno");

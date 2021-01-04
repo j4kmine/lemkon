@@ -495,27 +495,27 @@ public function perolehan_unindef_callback($post_array){
     $post_array['id_perolehan'] = str_replace("/","_",$post_array['id_perolehan']);
     $post_array['id_perolehan'] = str_replace(" ","-",$post_array['id_perolehan']);
 
-    $this->load->model("dinamika_satwa_noniden");
-    $temp = explode("-", $post_array['id_satwa_noniden']);
-    $namaLatin = "";
-    $namaLatinStrip="";
-    for($i=1;$i<count($temp);$i++){
-        $namaLatin .= $temp[$i]." ";
-        $namaLatinStrip.= $temp[$i]."-";
-    }
-    $namaLatin = $this->pembersih($namaLatin);
-    $namaLatinStrip = $this->pembersih($namaLatinStrip);
-    $temp2 = $this->dinamika_satwa_noniden->cekSatwaExist($post_array['lk_tujuan'], $namaLatin);
-    $id_satwa_noniden_tujuan = $post_array['lk_tujuan']."-".$namaLatinStrip;
-    $ada = "0";
-    foreach($temp2 as $row){
-        $ada = $row->isExist;
-    }
-    if($ada=="0"){
-        $this->dinamika_satwa_noniden->insertRow($post_array['lk_tujuan'], $namaLatin, $namaLatinStrip);
-    }
-    $this->updateJumlahSatwa($post_array, $id_satwa_noniden_tujuan, "+");
-    $this->updateJumlahSatwa($post_array, $post_array["id_satwa_noniden"], "-");
+    // $this->load->model("dinamika_satwa_noniden");
+    // $temp = explode("-", $post_array['id_satwa_noniden']);
+    // $namaLatin = "";
+    // $namaLatinStrip="";
+    // for($i=1;$i<count($temp);$i++){
+    //     $namaLatin .= $temp[$i]." ";
+    //     $namaLatinStrip.= $temp[$i]."-";
+    // }
+    // $namaLatin = $this->pembersih($namaLatin);
+    // $namaLatinStrip = $this->pembersih($namaLatinStrip);
+    // $temp2 = $this->dinamika_satwa_noniden->cekSatwaExist($post_array['lk_tujuan'], $namaLatin);
+    // $id_satwa_noniden_tujuan = $post_array['lk_tujuan']."-".$namaLatinStrip;
+    // $ada = "0";
+    // foreach($temp2 as $row){
+    //     $ada = $row->isExist;
+    // }
+    // if($ada=="0"){
+    //     $this->dinamika_satwa_noniden->insertRow($post_array['lk_tujuan'], $namaLatin, $namaLatinStrip);
+    // }
+    // $this->updateJumlahSatwa($post_array, $id_satwa_noniden_tujuan, "+");
+    // $this->updateJumlahSatwa($post_array, $post_array["id_satwa_noniden"], "-");
     return $post_array;
 }
 
@@ -757,7 +757,7 @@ public function currencyFormat($value, $row=null){
                         'title' => 'master_satwa_nama_latin', // state title                    
                         'id_field' => 'id_satwa_noniden', // table of state: primary key
                         'relate' => 'informasi_lk_umum_kode_lk', // table of state:
-                        'data-placeholder' => 'Pilih nama latin satwa' //dropdown's data-placeholder:
+                        'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
                         )
                     );
                     $config2 = array(
@@ -776,10 +776,6 @@ public function currencyFormat($value, $row=null){
                 $crud->set_relation("id_kawasan","master_kawasan","nama_kawasan");
 
                 $crud->display_as("id_satwa_noniden","Jenis Satwa")
-                ->display_as("provinsi_id_prov","Provinsi Pelepasliaran")
-                ->display_as("kabupaten_id_kab","Kabupaten Pelepasliaran")
-                ->display_as("kecamatan_id_kecamatan","Kecamatan Pelepasliaran")
-                ->display_as("kelurahan_id_lurah","Kelurahan Pelepasliaran")
                 ->display_as("id_kawasan","Kawasan")
                 ->display_as("informasi_lk_umum_id_lk", "Nama LK")
                 ;
@@ -788,20 +784,14 @@ public function currencyFormat($value, $row=null){
 
                 $crud->columns('id_satwa_noniden',
                                'tgl_pelepasliaran',
-                               'provinsi_id_prov',
-                               'kabupaten_id_kab',
                                'jumlah_jantan',
                                'jumlah_betina',
                                'jumlah_unknown'
                 );
 
-                $crud->callback_before_insert(array($this,'pelepasliaran_unindef_callback'));
-                $crud->callback_before_update(array($this,'pelepasliaran_unindef_callback'));
+              
                 
-                $crud->set_relation("provinsi_id_prov", "provinsi", "nama_prov");
-                $crud->set_relation("kabupaten_id_kab", "kabupaten", "nama_kab");
-                $crud->set_relation("kecamatan_id_kecamatan", "kecamatan", "nama_kecamatan");
-                $crud->set_relation("kelurahan_id_lurah", "kelurahan", "nama_lurah");
+                
 
                 $fields = array(
                         'provinsi_id_prov' => array(// first dropdown name
@@ -887,7 +877,7 @@ public function currencyFormat($value, $row=null){
 
                 $crud->unset_columns('id_perolehan');
 
-                $crud->callback_before_insert(array($this,'perolehan_unindef_callback'));
+                $crud->callback_before_insert(array($this,'perolehanUpdate_unindef_callback'));
                 $crud->callback_before_update(array($this,'perolehanUpdate_unindef_callback'));
 
                 if($this->hakAkses=="user"){
@@ -909,11 +899,12 @@ public function currencyFormat($value, $row=null){
                             'id_satwa_noniden' => array(// second dropdown name
                             'table_name' => 'dinamika_satwa_noniden', // table of state
                             'title' => 'master_satwa_nama_latin', // state title
+                       
                             //'title' => 'concat(nama_panggilan_satwa, " - ", informasi_lk_umum_id_lk, " / ", master_satwa_nama_latin) as no_identifikasi', // state title
                             
                             'id_field' => 'id_satwa_noniden', // table of state: primary key
                             'relate' => 'informasi_lk_umum_kode_lk', // table of state:
-                            'data-placeholder' => 'Pilih nama latin satwa' //dropdown's data-placeholder:
+                            'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
                             )
                         );
                     
@@ -988,9 +979,9 @@ public function currencyFormat($value, $row=null){
                 //$crud->set_rules('jumlah_jantan','Jumlah Jantan (Jumlah yg mati terlalu banyak)','callback_cekJmlKematianJantan');
 
                 $crud->callback_before_insert(array($this,'kematian_unindef_callback'));
-                $crud->callback_before_update(array($this,'updateMatiSatwa'));
-                $crud->callback_after_insert(array($this,'kurangSatwaKelompok'));
-                $crud->callback_before_delete(array($this,'deleteMatiSatwa'));
+                // $crud->callback_before_update(array($this,'updateMatiSatwa'));
+                // $crud->callback_after_insert(array($this,'kurangSatwaKelompok'));
+                // $crud->callback_before_delete(array($this,'deleteMatiSatwa'));
                 
                 /*
                 $crud->callback_before_insert(array($this,'kelahiran_unindef_callback'));
@@ -1024,7 +1015,7 @@ public function currencyFormat($value, $row=null){
                             
                             'id_field' => 'id_satwa_noniden', // table of state: primary key
                             'relate' => 'informasi_lk_umum_kode_lk', // table of state:
-                            'data-placeholder' => 'Pilih nama latin satwa' //dropdown's data-placeholder:
+                            'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
                             )
                         );
                     
@@ -1067,7 +1058,7 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('dinamika_satwa_noniden');
-
+                $crud->where('tgl_kelahiran !=',NULL);
                 $crud->field_type('id_satwa_noniden', 'hidden');
 
                 //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk");
@@ -1143,7 +1134,7 @@ public function currencyFormat($value, $row=null){
 
                 
                 $crud->set_field_upload('upload_sk_pelepasan','assets/uploads/lk/fulepas');
-                
+                $crud->display_as("id_kawasan","Kawasan");
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
                     $crud->field_type('lk_asal_informasi_lk_umum_kode_lk', 'hidden', $this->id_lk);
@@ -1312,11 +1303,14 @@ public function currencyFormat($value, $row=null){
         public function kematian_satwa_ctl(){
             
                 try{
+                
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_kematian_satwa_new');
                 $crud->set_field_upload('upload_bap','assets/uploads/lk/bapmati');
-                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");  
+                 
+                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");   
+                  
                 $crud->set_relation("master_jenis_kematian_id_jenis_kematian","master_sebab_mati","nama_sebab");                
                 $crud->set_relation("no_identifikasi_kematian","data_individu_satwa_new","no_identifikasi");  
                 $crud->columns('informasi_lk_umum_id_lk',
@@ -1328,7 +1322,7 @@ public function currencyFormat($value, $row=null){
                 $this->load->library('gc_dependent_select');
                 if($this->hakAkses=="user"){               
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
-                    $crud->where("data_individu_satwa.informasi_lk_umum_id_lk", $this->id_lk);
+                    $crud->where("data_individu_satwa_new.informasi_lk_umum_id_lk", $this->id_lk);
                 }
                 else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                    
@@ -1340,10 +1334,16 @@ public function currencyFormat($value, $row=null){
                 ;
                 $crud->callback_before_insert(array($this,'id_kematian_satwa_callback'));
                 $fields = array(
-                        'master_satwa_nama_latin' => array(// first dropdown name
+                        'informasi_lk_umum_id_lk' => array(// first dropdown name
                         'table_name' => 'data_individu_satwa_new', // table of country
                         'title' => 'master_satwa_nama_latin', // country title
                         'relate' => null, // the first dropdown hasn't a relation
+                        ),
+                        'master_satwa_nama_latin' => array(// first dropdown name
+                        'table_name' => 'data_individu_satwa_new', // table of country
+                        'title' => 'master_satwa_nama_latin', // country title
+                        'id_field' => 'id_individu_satwa', // table of state: primary key
+                        'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
                         'data-placeholder' => 'Pilih Jenis Satwa'
                         ),
                         'no_identifikasi_kematian' => array(// second dropdown name
@@ -1409,8 +1409,8 @@ public function currencyFormat($value, $row=null){
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
-                    $crud->where("data_individu_satwa.informasi_lk_umum_id_lk", $this->id_lk);
-                    $crud->set_relation("nama_induk_jantan","data_individu_satwa_new","{nama_panggilan_satwa} - {master_satwa_nama_latin}",array('master_jenis_kelamin_id_jenis_kelamin' => 'J', 'informasi_lk_umum_id_lk' => $this->id_lk), 'nama_panggilan_satwa ASC');
+                    $crud->where("data_individu_satwa_new.informasi_lk_umum_id_lk", $this->id_lk);
+                    $crud->set_relation("nama_induk_jantan","data_individu_satwa_new","{nama_panggilan_satwa} - {master_satwa_nammaster_satwa_nama_latina_latin}",array('master_jenis_kelamin_id_jenis_kelamin' => 'J', 'informasi_lk_umum_id_lk' => $this->id_lk), 'nama_panggilan_satwa ASC');
                     $crud->set_relation("nama_induk_betina","data_individu_satwa_new","{nama_panggilan_satwa} - {master_satwa_nama_latin}",array('master_jenis_kelamin_id_jenis_kelamin' => 'B', 'informasi_lk_umum_id_lk' => $this->id_lk), 'nama_panggilan_satwa ASC');
 
                     //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk", "");

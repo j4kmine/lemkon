@@ -1,6 +1,6 @@
 
 <!-- PAGE CONTENT ENDS -->
-<?php
+<?php echo
                 $title="";
 				$direktorat="";
 				$ditjen="Ditjen Penegakan Hukum Lingkungan Hidup dan Kehutanan";
@@ -36,7 +36,7 @@
 					<div class="footer-content">
 						<span class="bigger-120" style="line-height: 20px">
 							Kementerian Lingkungan Hidup dan Kehutanan<br />
-							<?=$ditjen?>
+							<?php echo $ditjen?>
 							<br />
 							
 							
@@ -73,16 +73,16 @@
 		
 
 		<!-- ace scripts -->
-		<script src="<?=base_url()."html/"?>assets/js/ace-elements.min.js"></script>
-		<script src="<?=base_url()."html/"?>assets/js/ace.min.js"></script>
-		<script src="<?=base_url("assets/html/js/cleave.js")?>"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/ace-elements.min.js"></script>
+		<script src="<?php echo base_url()."html/"?>assets/js/ace.min.js"></script>
+		<script src="<?php echo base_url("assets/html/js/cleave.js")?>"></script>
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+	
 			jQuery(function($) {
-
-
-
+			
+				
 				if(!ace.vars['touch']) {
 					$('.chosen-select').chosen({allow_single_deselect:true}); 
 					//resize the chosen on window resize
