@@ -278,11 +278,11 @@ public function getLahirMatiperSatwa(){
                         "showvalues"=> "1"
                     ),
                     "categories"=>
-                    [array(
+                    array(
                                 "category" => $labelLahirMati
-                    )],
+                    ),
                     "dataset"=>
-                    [
+                    
                         array(
                             "seriesname" => "Kelahiran",
                             "data" => $valueLahir
@@ -291,7 +291,7 @@ public function getLahirMatiperSatwa(){
                             "seriesname" => "Kematian",
                             "data" => $valueMati
                         )
-                    ]
+                    
 
                 );
     $chartData = json_encode($chartConfig);
@@ -354,12 +354,11 @@ public function getAnnualInvest(){
                         "theme"=> "fusion"
                     ),
                     "categories"=>
-                    [array(
+                    array(
                                 "category" => $labelAnnualLK_investasi
-                    )],
+                    ),
                     "dataset"=>
-                    [
-                        array(
+                    array(
                             "seriesname" => "Investasi Pegawai",
                             "data" => $valueAnnualPegawai
                         ),
@@ -371,7 +370,7 @@ public function getAnnualInvest(){
                             "seriesname" => "modal awal",
                             "data" => $valueAnnualModalAwal
                         )
-                    ]
+                    
 
                 );
     $chartData = json_encode($chartConfig);
