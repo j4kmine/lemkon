@@ -407,7 +407,9 @@ public function generateMd5($post_array){
     $this->load->helper('string');
     if($post_array['password']=="") {
         $post_array['password']="123456";                
-        $post_array['password'] = md5($post_array['password'].$post_array['username']);
+        $post_array['password'] = md5($post_array['password']);
+    }else{
+        $post_array['password'] = md5($post_array['password']);
     }
     
     return $post_array;
@@ -1223,7 +1225,10 @@ public function currencyFormat($value, $row=null){
                 $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","LK Asal")
                 ->display_as("lk_tujuan_informasi_lk_umum_kode_lk","LK Tujuan")
                 ->display_as("master_perolehan_id_perolehan","Cara Perolehan")    
-                ->display_as("master_satwa_nama_latin","Jenis Satwa")                               
+                ->display_as("master_satwa_nama_latin","Jenis Satwa") 
+                ->display_as("nomor_stad_din","Nomor SATS-DN")    
+                ->display_as("tanggal_sat_dn","Tanggal SATS-DN")
+                ->display_as("upload_sat_dn","Upload SATS-DN")                                
                 ;
                              
                 if($this->hakAkses=="user"){                    
@@ -1388,10 +1393,12 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_individu_satwa_new');
-
+                $crud->set_relation("master_status_hukum_satwa_id_status","master_status_hukum_satwa","nama_status");
                 $crud->fields('informasi_lk_umum_id_lk',
                                     'master_satwa_nama_latin',
+                                    'no_Identifikasi',
                                     'nama_panggilan_satwa',
+                                    'master_status_hukum_satwa_id_status',
                                     'tanggal_lahir',
                                     'nama_induk_jantan',
                                     'nama_induk_betina',
@@ -1399,7 +1406,9 @@ public function currencyFormat($value, $row=null){
 
                 $crud->columns('informasi_lk_umum_id_lk',
                 'master_satwa_nama_latin',
+                'master_status_hukum_satwa_id_status',
                 'nama_panggilan_satwa',
+                'no_Identifikasi',
                 'tanggal_lahir',
                 'nama_induk_jantan',
                 'nama_induk_betina',
@@ -1422,9 +1431,10 @@ public function currencyFormat($value, $row=null){
 
                 //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                
                 $crud->set_relation("master_satwa_nama_latin","master_satwa","{jenis_satwa} - {nama_latin}");                                
-    
+                $crud->set_rules('no_Identifikasi','No Identifikasi','required');
                 $crud->display_as("informasi_lk_umum_id_lk","Kode LK")                
-                ->display_as("master_satwa_nama_latin","Jenis Satwa")                
+                ->display_as("master_satwa_nama_latin","Jenis Satwa")  
+                ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa")              
                 ;
 
                 $crud->set_field_upload('upload_bap','assets/uploads/lk/baplahir');
@@ -1828,12 +1838,12 @@ public function index(){
                 $crud->set_table('member');
                 $crud->set_theme('datatables');
                 //$crud->add_action('Reset Password', '', '','ui-icon-lightbulb',array($this,'resetPass'));
-                $crud->add_action('Reset Password', '', 'lemkon/resetPass','ui-icon-image');
+                //$crud->add_action('Reset Password', '', 'lemkon/resetPass','ui-icon-image');
                                         
                 $crud->set_relation('id_lk', 'informasi_lk_umum', 'nama_lk');
                 $crud->set_relation('id_prov', 'provinsi', 'nama_prov');     
-                $crud->field_type('password', 'hidden');
-                $crud->field_type('hak_akses','dropdown',array('SUPER AMDIN' => 'Super Admin','ADMIN' => 'Admin', 'USER' => 'User'));
+                // $crud->field_type('password', 'hidden');
+                $crud->field_type('hak_akses','dropdown',array('ADMIN' => 'Admin','SUB ADMIN' => 'Sub Admin', 'USER' => 'User'));
                     //$crud->field_type('username', 'hidden');
                 $crud->callback_before_insert(array($this,'generateKey'));
                 $crud->callback_before_insert(array($this,'generateMd5'));

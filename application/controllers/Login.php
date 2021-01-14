@@ -44,8 +44,8 @@ class Login extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		if($loginConfig['Use MD5 Encryption']) {
-                    $password = md5($username);
-                }
+			$password = md5($password);
+		}
 		
        	$this->db->where("username",$username);
         $this->db->where("password",$password);
