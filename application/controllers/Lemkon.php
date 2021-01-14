@@ -663,9 +663,9 @@ function individu_satwa_callback($post_array){
     $post_array['id_individu_satwa'] = str_replace("/","_",$post_array['id_individu_satwa']);
     $post_array['id_individu_satwa'] = str_replace(" ","-",$post_array['id_individu_satwa']);
         
-    $tanggal_perolehan = date('Y-m-d');
-    $this->load->model("perolehan_satwa");
-    $this->perolehan_satwa->insertPerolehanSatwa($post_array['id_individu_satwa'], "AWL", $tanggal_perolehan, $post_array['informasi_lk_umum_id_lk']);
+    // $tanggal_perolehan = date('Y-m-d');
+    // $this->load->model("perolehan_satwa");
+    // $this->perolehan_satwa->insertPerolehanSatwa($post_array['id_individu_satwa'], "AWL", $tanggal_perolehan, $post_array['informasi_lk_umum_id_lk']);
     return $post_array;
 }
 
