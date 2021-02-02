@@ -186,11 +186,24 @@ $( document ).ready(function() {
                 
     });
     $("#field-hak_akses").change(function(){
-        $("#field-id_lk").prop('disabled', false).trigger("liszt:updated");            
+        $("#field-id_lk").prop('disabled', false).trigger("liszt:updated");   
+        $("#field-id_prov").prop('disabled', false).trigger("liszt:updated");            
             //$("#field-id_kawasan").val('').trigger("liszt:updated");
-            if($("#field-hak_akses").val()==="ADMIN"){
+            if($("#field-hak_akses").val() ==="ADMIN"){
                 $("#field-id_lk").prop('disabled', true).trigger("liszt:updated");            
                 $("#field-id_lk").val('').trigger("liszt:updated");
+                $("#field-id_prov").prop('disabled', true).trigger("liszt:updated");            
+                $("#field-id_prov").val('').trigger("liszt:updated");
+            }else if($("#field-hak_akses").val() ==="SUB ADMIN"){
+                $("#field-id_lk").prop('disabled', true).trigger("liszt:updated");            
+                $("#field-id_lk").val('').trigger("liszt:updated");
+                $("#field-id_prov").prop('enabled', true).trigger("liszt:updated");            
+                $("#field-id_prov").val('').trigger("liszt:updated");
+            }else if($("#field-hak_akses").val() ==="USER"){
+                $("#field-id_lk").prop('enabled', true).trigger("liszt:updated");            
+                $("#field-id_lk").val('').trigger("liszt:updated");
+                $("#field-id_prov").prop('disabled', true).trigger("liszt:updated");            
+                $("#field-id_prov").val('').trigger("liszt:updated");
             }
                 
         });
