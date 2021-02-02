@@ -52,8 +52,8 @@ class Login extends CI_Controller {
         //$query = $this->db->get("crud_users");
         
         $query = $this->db->get("member");
-		
 		if ($query->num_rows() == 1) {
+			
 			//$name = $query->row()->username;
 			//$permissions = (isset($query->row()->permissions)?$query->row()->permissions:"");
 			$data = json_encode(array(
@@ -63,7 +63,7 @@ class Login extends CI_Controller {
 							"id_lk"=>$query->row()->id_lk,
                             "username"=>$query->row()->username));
 			$this->session->set_userdata('loginStatus',$data);
-                        
+		
 			redirect($loginConfig['Page After Login']);
 		}else{
 			/* ERROR PART */

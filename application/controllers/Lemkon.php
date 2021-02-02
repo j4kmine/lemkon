@@ -19,7 +19,7 @@ class lemkon extends CI_Controller {
                         $this->nip= strtolower($this->login_model->nip());
                         $this->id_lk= $this->login_model->id_lk();
                         //echo "HI $name! You are Logged IN!";
-                    }else{
+                    }else{ 
                         redirect("/login");
                     }
         }
