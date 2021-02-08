@@ -17,6 +17,7 @@ class lemkon extends CI_Controller {
                         $this->hakAkses= strtolower($this->login_model->hakAkses());
                         $this->nama= strtolower($this->login_model->nama());
                         $this->nip= strtolower($this->login_model->nip());
+                        $this->provinsi= strtolower($this->login_model->provinsi());
                         $this->id_lk= $this->login_model->id_lk();
                         //echo "HI $name! You are Logged IN!";
                     }else{ 
@@ -1412,6 +1413,32 @@ public function currencyFormat($value, $row=null){
                         );
                         
                       
+                }else if ($this->hakAkses=="subadmin") { 
+                    $crud->unset_edit();            
+                    $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
+                    $crud->where("provinsi_id_prov", $this->provinsi);
+                    $state = $crud->getState();
+                    $fields = array(
+                           'informasi_lk_umum_id_lk' => array(// first dropdown name
+                           'table_name' => 'data_individu_satwa_new', // table of country
+                           'title' => 'master_satwa_nama_latin', // country title
+                           'relate' => null, // the first dropdown hasn't a relation
+                           ),
+                           'master_satwa_nama_latin' => array(// first dropdown name
+                           'table_name' => 'data_individu_satwa_new', // table of country
+                           'title' => 'id_individu_satwa', // country title
+                           'id_field' => 'master_satwa_nama_latin', // table of state: primary key
+                           'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
+                           'data-placeholder' => 'Pilih Jenis Satwa'
+                           ),
+                           'no_identifikasi_kematian' => array(// second dropdown name
+                           'table_name' => 'data_individu_satwa_new', // table of state
+                           'title'=>'no_identifikasi',
+                           'id_field' => 'id_individu_satwa', // table of state: primary key
+                           'relate' => 'id_individu_satwa', // table of state:
+                           'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                           )
+                   );
                 }
                 else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");
@@ -1523,6 +1550,9 @@ public function currencyFormat($value, $row=null){
                  
 
                     //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk", "");
+                }else if ($this->hakAkses=="subadmin") {             
+                    $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
+                    $crud->where("provinsi_id_prov", $this->provinsi);
                 }
                 else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");
@@ -1642,16 +1672,17 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_individu_satwa_new');
-
                 $crud->display_as("informasi_lk_umum_id_lk","Id LK");
-
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
                     $crud->where("informasi_lk_umum_id_lk", $this->id_lk);
                     //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk", "");
                 }
-                else{
+                else if ($this->hakAkses=="subadmin") {             
+                    $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
+                    $crud->where("provinsi_id_prov", $this->provinsi);
+                }else{
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");
                 }
                 $crud->field_type('kondisi_satwa','dropdown',array('HIDUP' => 'Hidup','DIAWETKAN' => 'Diawetkan'));
@@ -1946,7 +1977,7 @@ public function index(){
                 $crud->set_relation('id_lk', 'informasi_lk_umum', 'nama_lk');
                 $crud->set_relation('id_prov', 'provinsi', 'nama_prov');     
                 // $crud->field_type('password', 'hidden');
-                $crud->field_type('hak_akses','dropdown',array('ADMIN' => 'Admin','SUB ADMIN' => 'Sub Admin', 'USER' => 'User'));
+                $crud->field_type('hak_akses','dropdown',array('ADMIN' => 'Admin','SUBADMIN' => 'SubAdmin', 'USER' => 'User'));
                     //$crud->field_type('username', 'hidden');
                 $crud->callback_before_insert(array($this,'generateKey'));
                 $crud->callback_before_insert(array($this,'generateMd5'));

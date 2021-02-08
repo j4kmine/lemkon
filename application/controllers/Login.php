@@ -61,6 +61,7 @@ class Login extends CI_Controller {
                             "hak_akses"=>$query->row()->hak_akses,
 							"nama"=>$query->row()->nama,
 							"id_lk"=>$query->row()->id_lk,
+							"provinsi"=>$query->row()->id_prov,
                             "username"=>$query->row()->username));
 			$this->session->set_userdata('loginStatus',$data);
 		

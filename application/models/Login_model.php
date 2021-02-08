@@ -31,6 +31,10 @@ class Login_model  extends CI_Model  {
 			$data = json_decode($this->session->userdata('loginStatus'));
 			return $data->nama;
 		}
+		public function provinsi(){
+			$data = json_decode($this->session->userdata('loginStatus'));
+			return $data->provinsi;
+		}
 
 		public function nip(){
 			$data = json_decode($this->session->userdata('loginStatus'));
