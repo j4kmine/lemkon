@@ -759,9 +759,37 @@ public function currencyFormat($value, $row=null){
                 $this->load->library('gc_dependent_select');
 
                 if($this->hakAkses=="user"){
+                    $crud->unset_edit();
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
                     $crud->where("informasi_lk_umum_id_lk", $this->id_lk);
                     $crud->set_relation("id_satwa_noniden","dinamika_satwa_noniden","{master_satwa_nama_latin}", array('informasi_lk_umum_kode_lk' => $this->id_lk));
+                
+                }else if($this->hakAkses=="subadmin"){
+                    $crud->unset_edit();
+                    $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
+                    $fields2 = array(
+                        'informasi_lk_umum_id_lk' => array(// first dropdown name
+                        'table_name' => 'informasi_lk_umum', // table of country
+                        'title' => 'nama_lk', // country title
+                        'relate' => null // the first dropdown hasn't a relation
+                        //'data-placeholder' => 'Pilih LK'
+                        ),
+                        'id_satwa_noniden' => array(// second dropdown name
+                        'table_name' => 'dinamika_satwa_noniden', // table of state
+                        'title' => 'master_satwa_nama_latin', // state title                    
+                        'id_field' => 'id_satwa_noniden', // table of state: primary key
+                        'relate' => 'informasi_lk_umum_kode_lk', // table of state:
+                        'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
+                        )
+                    );
+                    $config2 = array(
+                        'main_table' => 'histori_pelepasliaran_noniden',
+                        'main_table_primary' => 'id_histori_lepas',
+                        "url" => base_url() .'index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
+                        'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                    );
+                    $categories2 = new gc_dependent_select($crud, $fields2, $config2);
+                    $js2 = $categories2->get_js();
                 }else{
                     $crud->set_relation("id_satwa_noniden","dinamika_satwa_noniden","master_satwa_nama_latin");
                     $crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");
@@ -890,7 +918,7 @@ public function currencyFormat($value, $row=null){
                 //warning kasih session juga
                 $crud->set_relation("id_satwa_noniden","dinamika_satwa_noniden","master_satwa_nama_latin");
                 $crud->set_relation("cara_perolehan","master_perolehan","cara_perolehan");
-                $crud->set_relation("lk_tujuan","informasi_lk_umum","nama_lk");
+               
                
           
                 $crud->display_as("id_satwa_noniden","Jenis Satwa");
@@ -902,87 +930,87 @@ public function currencyFormat($value, $row=null){
                 $crud->callback_before_insert(array($this,'perolehanUpdate_unindef_callback'));
                 $crud->callback_before_update(array($this,'kematian_unindef_callback_update'));
  
-                if ($this->hakAkses=="user") {
-                    $crud->unset_edit();
-                    $crud->field_type('lk_asal', 'hidden', $this->id_lk);
-                    $crud->where("lk_asal", $this->id_lk);
-                    $crud->set_relation("id_satwa_noniden", "dinamika_satwa_noniden", "{master_satwa_nama_latin}", array('informasi_lk_umum_kode_lk' => $this->id_lk));
-                    $output = $crud->render();
-                    $this->displayCRUD($output);
-                }if($this->hakAkses=="subadmin"){
-                    $crud->unset_edit();
-                    $crud->set_relation("lk_asal","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
-                   
-                    $this->load->library('gc_dependent_select');
-                
-                    $fields = array(
-                            'lk_asal' => array(// first dropdown name
-                            'table_name' => 'informasi_lk_umum', // table of country
-                            'title' => 'nama_lk', // country title
-                            'relate' => null, // the first dropdown hasn't a relation
-                            'data-placeholder' => 'Pilih LK asal'
-                            ),
-                            'id_satwa_noniden' => array(// second dropdown name
-                            'table_name' => 'dinamika_satwa_noniden', // table of state
-                            'title' => 'master_satwa_nama_latin', // state title
-                       
-                            //'title' => 'concat(nama_panggilan_satwa, " - ", informasi_lk_umum_id_lk, " / ", master_satwa_nama_latin) as no_identifikasi', // state title
-                            
-                            'id_field' => 'id_satwa_noniden', // table of state: primary key
-                            'relate' => 'informasi_lk_umum_kode_lk', // table of state:
-                            'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
-                            )
-                        );
+                    if ($this->hakAkses=="user") {
+                        $crud->unset_edit();
+                        $crud->field_type('lk_asal', 'hidden', $this->id_lk);
+                        $crud->where("lk_asal", $this->id_lk);
+                        $crud->set_relation("id_satwa_noniden", "dinamika_satwa_noniden", "{master_satwa_nama_latin}", array('informasi_lk_umum_kode_lk' => $this->id_lk));
+                        $output = $crud->render();
+                        $this->displayCRUD($output);
+                    }else if($this->hakAkses=="subadmin"){
+                        $crud->unset_edit();
+                        $crud->set_relation("lk_asal","informasi_lk_umum","nama_lk",array('provinsi_id_prov' => $this->provinsi));    
+                        $crud->where("provinsi_id_prov", $this->provinsi);
+                        $this->load->library('gc_dependent_select');
                     
-                    $config = array(
-                                'main_table' => 'histori_perolehan_noniden',
-                                'main_table_primary' => 'id_perolehan',
-                                "url" => base_url() .'index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
-                                'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                        $fields = array(
+                                'lk_asal' => array(// first dropdown name
+                                'table_name' => 'informasi_lk_umum', // table of country
+                                'title' => 'nama_lk', // country title
+                                'relate' => null, // the first dropdown hasn't a relation
+                                'data-placeholder' => 'Pilih LK asal'
+                                ),
+                                'id_satwa_noniden' => array(// second dropdown name
+                                'table_name' => 'dinamika_satwa_noniden', // table of state
+                                'title' => 'master_satwa_nama_latin', // state title
+                        
+                                //'title' => 'concat(nama_panggilan_satwa, " - ", informasi_lk_umum_id_lk, " / ", master_satwa_nama_latin) as no_identifikasi', // state title
+                                
+                                'id_field' => 'id_satwa_noniden', // table of state: primary key
+                                'relate' => 'informasi_lk_umum_kode_lk', // table of state:
+                                'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
+                                )
                             );
-                    $categories = new gc_dependent_select($crud, $fields, $config);
-                    $js = $categories->get_js();
+                        
+                        $config = array(
+                                    'main_table' => 'histori_perolehan_noniden',
+                                    'main_table_primary' => 'id_perolehan',
+                                    "url" => base_url() .'index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
+                                    'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                                );
+                        $categories = new gc_dependent_select($crud, $fields, $config);
+                        $js = $categories->get_js();
+                        
+                        $output = $crud->render();        
+                        $output->output.= $js;
+                        $this->displayCRUD($output);
+                    }else{
+                        $crud->set_relation("lk_asal","informasi_lk_umum","nama_lk");
+                        $crud->set_relation("id_satwa_noniden","dinamika_satwa_noniden","{master_satwa_nama_latin} - {informasi_lk_umum_kode_lk}");
+                        $this->load->library('gc_dependent_select');
                     
-                    $output = $crud->render();        
-                    $output->output.= $js;
-                    $this->displayCRUD($output);
-                }else{
-                     $crud->set_relation("lk_asal","informasi_lk_umum","nama_lk");
-                    $crud->set_relation("id_satwa_noniden","dinamika_satwa_noniden","{master_satwa_nama_latin} - {informasi_lk_umum_kode_lk}");
-                    $this->load->library('gc_dependent_select');
-                
-                    $fields = array(
-                            'lk_asal' => array(// first dropdown name
-                            'table_name' => 'informasi_lk_umum', // table of country
-                            'title' => 'nama_lk', // country title
-                            'relate' => null, // the first dropdown hasn't a relation
-                            'data-placeholder' => 'Pilih LK asal'
-                            ),
-                            'id_satwa_noniden' => array(// second dropdown name
-                            'table_name' => 'dinamika_satwa_noniden', // table of state
-                            'title' => 'master_satwa_nama_latin', // state title
-                       
-                            //'title' => 'concat(nama_panggilan_satwa, " - ", informasi_lk_umum_id_lk, " / ", master_satwa_nama_latin) as no_identifikasi', // state title
-                            
-                            'id_field' => 'id_satwa_noniden', // table of state: primary key
-                            'relate' => 'informasi_lk_umum_kode_lk', // table of state:
-                            'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
-                            )
-                        );
-                    
-                    $config = array(
-                                'main_table' => 'histori_perolehan_noniden',
-                                'main_table_primary' => 'id_perolehan',
-                                "url" => base_url() .'index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
-                                'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                        $fields = array(
+                                'lk_asal' => array(// first dropdown name
+                                'table_name' => 'informasi_lk_umum', // table of country
+                                'title' => 'nama_lk', // country title
+                                'relate' => null, // the first dropdown hasn't a relation
+                                'data-placeholder' => 'Pilih LK asal'
+                                ),
+                                'id_satwa_noniden' => array(// second dropdown name
+                                'table_name' => 'dinamika_satwa_noniden', // table of state
+                                'title' => 'master_satwa_nama_latin', // state title
+                        
+                                //'title' => 'concat(nama_panggilan_satwa, " - ", informasi_lk_umum_id_lk, " / ", master_satwa_nama_latin) as no_identifikasi', // state title
+                                
+                                'id_field' => 'id_satwa_noniden', // table of state: primary key
+                                'relate' => 'informasi_lk_umum_kode_lk', // table of state:
+                                'data-placeholder' => 'Pilih Jenis Satwa' //dropdown's data-placeholder:
+                                )
                             );
-                    $categories = new gc_dependent_select($crud, $fields, $config);
-                    $js = $categories->get_js();
-                    
-                    $output = $crud->render();        
-                    $output->output.= $js;
-                    $this->displayCRUD($output);
-                }
+                        
+                        $config = array(
+                                    'main_table' => 'histori_perolehan_noniden',
+                                    'main_table_primary' => 'id_perolehan',
+                                    "url" => base_url() .'index.php/'. __CLASS__ . '/' . __FUNCTION__ . '/',
+                                    'ajax_loader' => base_url() . '/assets/grocery_crud/themes/datatables/css/images/small-loading.gif'
+                                );
+                        $categories = new gc_dependent_select($crud, $fields, $config);
+                        $js = $categories->get_js();
+                        
+                        $output = $crud->render();        
+                        $output->output.= $js;
+                        $this->displayCRUD($output);
+                    }
 
                 
                 
