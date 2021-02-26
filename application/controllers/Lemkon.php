@@ -1261,7 +1261,7 @@ public function currencyFormat($value, $row=null){
                 //warningg tambahin where dr LK session
                 
                 $crud->set_relation("id_kawasan","master_kawasan","nama_kawasan");
-                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");  
+               
                 $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");  
                 $crud->field_type('id_pelepasan', 'hidden');
 
@@ -1295,18 +1295,18 @@ public function currencyFormat($value, $row=null){
                     'title' => 'nama_lk', // country title
                     'relate' => null, // the first dropdown hasn't a relation
                     ),
-                    'master_satwa_nama_latin' => array(// second dropdown name
-                        'table_name' => 'data_individu_satwa_new', // table of state
-                        'title'=>'master_satwa_nama_latin',
-                        'id_field' => 'id_individu_satwa', // table of state: primary key
-                        'relate' => 'informasi_lk_umum_id_lk', // table of state:
-                        'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                    'master_satwa_nama_latin' => array(// first dropdown name
+                        'table_name' => 'nama_satwa_individu', // table of country
+                        'title' => 'master_satwa_nama_latin', // country title
+                        'id_field' => 'master_satwa_nama_latin', // table of state: primary key
+                        'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
+                        'data-placeholder' => 'Pilih Jenis Satwa'
                     ),
                     'no_identifikasi' => array(// second dropdown name
                         'table_name' => 'data_individu_satwa_new', // table of state
                         'title'=>'no_identifikasi',
                         'id_field' => 'id_individu_satwa', // table of state: primary key
-                        'relate' => 'id_individu_satwa', // table of state:
+                        'relate' => 'master_satwa_nama_latin', // table of state:
                         'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                     )
                 );
@@ -1355,7 +1355,7 @@ public function currencyFormat($value, $row=null){
                 
                 $crud->set_relation("lk_tujuan_informasi_lk_umum_kode_lk", "informasi_lk_umum", "nama_lk");
                 $crud->set_relation("master_perolehan_id_perolehan","master_perolehan","cara_perolehan");                                  
-                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");  
+              
                 $crud->unset_columns("id_perolehan");
                 $crud->field_type('id_perolehan', 'hidden');
 
@@ -1382,18 +1382,18 @@ public function currencyFormat($value, $row=null){
                             'title' => 'nama_lk', // country title
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
-                            'master_satwa_nama_latin' => array(// second dropdown name
-                                'table_name' => 'data_individu_satwa_new', // table of state
-                                'title'=>'master_satwa_nama_latin',
-                                'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'informasi_lk_umum_id_lk', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
-                            ),
+                            'master_satwa_nama_latin' => array(// first dropdown name
+                                'table_name' => 'nama_satwa_individu', // table of country
+                                'title' => 'master_satwa_nama_latin', // country title
+                                'id_field' => 'master_satwa_nama_latin', // table of state: primary key
+                                'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
+                                'data-placeholder' => 'Pilih Jenis Satwa'
+                             ),
                             'no_identifikasi' => array(// second dropdown name
                                 'table_name' => 'data_individu_satwa_new', // table of state
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'id_individu_satwa', // table of state:
+                                'relate' => 'master_satwa_nama_latin', // table of state:
                                 'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                             )
                         );
@@ -1424,20 +1424,20 @@ public function currencyFormat($value, $row=null){
                             'title' => 'nama_lk', // country title
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
-                            'master_satwa_nama_latin' => array(// second dropdown name
-                                'table_name' => 'data_individu_satwa_new', // table of state
-                                'title'=>'master_satwa_nama_latin',
-                                'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'informasi_lk_umum_id_lk', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
-                            ),
+                            'master_satwa_nama_latin' => array(// first dropdown name
+                                'table_name' => 'nama_satwa_individu', // table of country
+                                'title' => 'master_satwa_nama_latin', // country title
+                                'id_field' => 'master_satwa_nama_latin', // table of state: primary key
+                                'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
+                                'data-placeholder' => 'Pilih Jenis Satwa'
+                             ),
                             'no_identifikasi' => array(// second dropdown name
                                 'table_name' => 'data_individu_satwa_new', // table of state
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'id_individu_satwa', // table of state:
+                                'relate' => 'master_satwa_nama_latin', // table of state:
                                 'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
-                            )
+                             )
                         );
                     
                     $config = array(
@@ -1465,18 +1465,18 @@ public function currencyFormat($value, $row=null){
                             'title' => 'nama_lk', // country title
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
-                            'master_satwa_nama_latin' => array(// second dropdown name
-                                'table_name' => 'data_individu_satwa_new', // table of state
-                                'title'=>'master_satwa_nama_latin',
-                                'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'informasi_lk_umum_id_lk', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
-                            ),
+                            'master_satwa_nama_latin' => array(// first dropdown name
+                                'table_name' => 'nama_satwa_individu', // table of country
+                                'title' => 'master_satwa_nama_latin', // country title
+                                'id_field' => 'master_satwa_nama_latin', // table of state: primary key
+                                'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
+                                'data-placeholder' => 'Pilih Jenis Satwa'
+                             ),
                             'no_identifikasi' => array(// second dropdown name
                                 'table_name' => 'data_individu_satwa_new', // table of state
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'id_individu_satwa', // table of state:
+                                'relate' => 'master_satwa_nama_latin', // table of state:
                                 'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                             )
                         );
@@ -1526,8 +1526,6 @@ public function currencyFormat($value, $row=null){
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_kematian_satwa_new');
                 $crud->set_field_upload('upload_bap','assets/uploads/lk/bapmati');
-                 
-                $crud->set_relation("master_satwa_nama_latin","data_individu_satwa_new","master_satwa_nama_latin");   
                   
                 $crud->set_relation("master_jenis_kematian_id_jenis_kematian","master_sebab_mati","nama_sebab");                
                 // $crud->set_relation("no_identifikasi_kematian","data_individu_satwa_new","no_identifikasi");  
@@ -1550,8 +1548,8 @@ public function currencyFormat($value, $row=null){
                                 'relate' => null, // the first dropdown hasn't a relation
                                 ),
                                 'master_satwa_nama_latin' => array(// first dropdown name
-                                'table_name' => 'data_individu_satwa_new', // table of country
-                                'title' => 'id_individu_satwa', // country title
+                                'table_name' => 'nama_satwa_individu', // table of country
+                                'title' => 'master_satwa_nama_latin', // country title
                                 'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                                 'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
                                 'data-placeholder' => 'Pilih Jenis Satwa'
@@ -1560,7 +1558,7 @@ public function currencyFormat($value, $row=null){
                                 'table_name' => 'data_individu_satwa_new', // table of state
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
-                                'relate' => 'id_individu_satwa', // table of state:
+                                'relate' => 'master_satwa_nama_latin', // table of state:
                                 'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                                 )
                         );
@@ -1577,9 +1575,9 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                            'table_name' => 'data_individu_satwa_new', // table of country
+                            'table_name' => 'nama_satwa_individu', // table of country
                             'title' => 'master_satwa_nama_latin', // country title
-                            'id_field' => 'id_individu_satwa', // table of state: primary key
+                            'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                             'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
                             'data-placeholder' => 'Pilih Jenis Satwa'
                             ),
@@ -1587,7 +1585,7 @@ public function currencyFormat($value, $row=null){
                             'table_name' => 'data_individu_satwa_new', // table of state
                             'title'=>'no_identifikasi',
                             'id_field' => 'id_individu_satwa', // table of state: primary key
-                            'relate' => 'id_individu_satwa', // table of state:
+                            'relate' => 'master_satwa_nama_latin', // table of state:
                             'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                             )
                     );
@@ -1601,9 +1599,9 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                            'table_name' => 'data_individu_satwa_new', // table of country
+                            'table_name' => 'nama_satwa_individu', // table of country
                             'title' => 'master_satwa_nama_latin', // country title
-                            'id_field' => 'id_individu_satwa', // table of state: primary key
+                            'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                             'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
                             'data-placeholder' => 'Pilih Jenis Satwa'
                             ),
@@ -1611,7 +1609,7 @@ public function currencyFormat($value, $row=null){
                             'table_name' => 'data_individu_satwa_new', // table of state
                             'title'=>'no_identifikasi',
                             'id_field' => 'id_individu_satwa', // table of state: primary key
-                            'relate' => 'id_individu_satwa', // table of state:
+                            'relate' => 'master_satwa_nama_latin', // table of state:
                             'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
                             )
                     );
@@ -1622,7 +1620,7 @@ public function currencyFormat($value, $row=null){
                 ->display_as("master_satwa_nama_latin","Jenis Satwa")     
                 ->display_as("master_jenis_kematian_id_jenis_kematian","Penyebab Kematian")             
                 ;
-                $crud->callback_before_insert(array($this,'id_kematian_satwa_callback'));
+               
                
                 $config = array(
                     'main_table' => 'data_kematian_satwa_new',

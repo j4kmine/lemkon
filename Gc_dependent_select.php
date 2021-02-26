@@ -27,7 +27,7 @@ class Gc_dependent_select
 
     function __construct($crud_obj = null, $fields = null, $config = null)
     {
-
+       
         if (func_num_args() !== 3) {
             return false;
         }
@@ -57,7 +57,7 @@ class Gc_dependent_select
 
     protected function get_items()
     {
-
+        
         if (in_array($this->segment_name, $this->segments)) {
 
             if (count($this->segments) >= (array_search($this->segment_name, $this->segments) + 2)) {

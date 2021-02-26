@@ -26,6 +26,7 @@ class gc_dependent_select
 
     function __construct($crud_obj = null, $fields = null, $config = null)
     {
+
 	if (!isset($crud_obj) or !isset($fields) or !isset($config))
 	    return false;
 	$this->ci = & get_instance();
@@ -38,13 +39,14 @@ class gc_dependent_select
 	}
 	if (!empty($fields))
 	{
+	
 	    foreach ($fields as $k => $v)
 	    {
-		if (!empty($v['relate']))
-		{
-		    $this->grocery_crud_obj->callback_edit_field($k, array($this, 'callback_edit'));
-		    $this->grocery_crud_obj->callback_add_field($k, array($this, 'callback_add'));
-		}
+			if (!empty($v['relate']))
+			{
+				$this->grocery_crud_obj->callback_edit_field($k, array($this, 'callback_edit'));
+				$this->grocery_crud_obj->callback_add_field($k, array($this, 'callback_add'));
+			}
 	    }
 	}
 	$segs = $this->ci->uri->segment_array();
@@ -61,6 +63,8 @@ class gc_dependent_select
 		}
 		else
 		{
+			$this->id =  str_replace("%20"," ",$this->id);
+			
 		    $this->get_json();
 		    exit;
 		}
@@ -282,6 +286,7 @@ class gc_dependent_select
 
 	$db    = $this->ci->db->get();
 	$array = array();
+
 	foreach ($db->result_array() as $row)
 	{
 	    if (!empty($fields_array[1]))
@@ -293,12 +298,13 @@ class gc_dependent_select
 	    }
 	    if ($substr_count > 0)
 	    {
-		$array[] = array("value"    => $row[$this->fields[$this->field_name]['id_field']], "property" => str_replace($fields_array[0], $replace, $this->fields[$this->field_name]['title']));
-	    }
-	    else
+			$array[] = array("value"    => $row[$this->fields[$this->field_name]['id_field']], "property" => str_replace($fields_array[0], $replace, $this->fields[$this->field_name]['title']));
+	    }else
 	    {
-		$array[] = array("value"    => $row[$this->fields[$this->field_name]['id_field']], "property" => $row[$this->fields[$this->field_name]['title']]);
+
+			$array[] = array("value"    => $row[$this->fields[$this->field_name]['id_field']], "property" => $row[$this->fields[$this->field_name]['title']]);
 	    }
+	
 	    $replace   = NULL;
 	};
 
