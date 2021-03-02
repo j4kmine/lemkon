@@ -881,10 +881,19 @@
 								<b class="arrow"></b>
 
 								<ul class="submenu">
-									
-									<li class="<?php
-								if($this->uri->segment(2)=="monitoring_individu_satwa")echo "active"
+								<li class="<?php
+								if($this->uri->segment(2)=="monitoring_indeks_satwa")echo "active"
 							?>">
+										<a href="<?php echo site_url("lemkon/monitoring_indeks_satwa")?>">
+											<i class="menu-icon"></i>
+											Indeks Satwa Individu
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="<?php
+										if($this->uri->segment(2)=="monitoring_individu_satwa")echo "active"
+									?>">
 										<a href="<?php echo site_url("lemkon/monitoring_individu_satwa")?>">
 											<i class="menu-icon"></i>
 											Data Individu Satwa
@@ -892,7 +901,7 @@
 
 										<b class="arrow"></b>
 									</li>
-
+									
 									<li class="<?php
 								if($this->uri->segment(2)=="monitoring_kelahiran_satwa")echo "active"
 

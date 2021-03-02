@@ -1808,7 +1808,29 @@ public function currencyFormat($value, $row=null){
                 }
             
         }
-
+        public function monitoring_indeks_satwa(){
+            
+            $req["judul"]="Monitoring Indeks Individu Satwa";
+            $req["url"]=site_url('lemkon/indeks_satwa_ctl');
+            $req["app"]="lk";
+            $req["hak_akses"] = $this->login_model->hakAkses();
+            $this->load->view("header", $req);
+            $this->load->view("MstInstansiView", $req);
+            $this->load->view("footer");
+        }
+        public function indeks_satwa_ctl(){
+            try{
+                $crud=new grocery_CRUD();
+                $crud->set_language("indonesian");          
+                $crud->set_table('indeks');
+                $crud->set_primary_key('jenis_satwa');
+                $crud->unset_operations();            
+                $output = $crud->render();        
+                $this->displayCRUD($output);
+                }catch(Exception $e){
+                    show_error($e->getMessage().' --- '.$e->getTraceAsString());
+                }
+        }
         public function monitoring_individu_satwa(){
             
             $req["judul"]="Monitoring Data Individu Satwa";
