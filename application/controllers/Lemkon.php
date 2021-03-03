@@ -1286,7 +1286,10 @@ public function currencyFormat($value, $row=null){
                 }
 
              
-                 $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","LK Asal");
+                $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","Nama lembaga Konservasi");
+                $crud->display_as("no_identifikasi","Nomor Identifikasi Satwa");
+                $crud->display_as("master_satwa_nama_latin","Jenis Satwa");
+                $crud->display_as("upload_sk_pelepasan","SK Pelepasliaran");
                 $this->load->library('gc_dependent_select');
                 
                 $fields = array(
@@ -1307,7 +1310,7 @@ public function currencyFormat($value, $row=null){
                         'title'=>'no_identifikasi',
                         'id_field' => 'id_individu_satwa', // table of state: primary key
                         'relate' => 'master_satwa_nama_latin', // table of state:
-                        'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                        'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                     )
                 );
                 
@@ -1359,13 +1362,13 @@ public function currencyFormat($value, $row=null){
                 $crud->unset_columns("id_perolehan");
                 $crud->field_type('id_perolehan', 'hidden');
 
-                $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","LK Asal")
-                ->display_as("lk_tujuan_informasi_lk_umum_kode_lk","LK Tujuan")
+                $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","Asal Lembaga Konservasi")
+                ->display_as("lk_tujuan_informasi_lk_umum_kode_lk","Tujuan Lembaga Konservasi")
                 ->display_as("master_perolehan_id_perolehan","Cara Perolehan")    
                 ->display_as("master_satwa_nama_latin","Jenis Satwa") 
                 ->display_as("nomor_stad_din","Nomor SATS-DN")    
-                ->display_as("tanggal_sat_dn","Tanggal SATS-DN")
-                ->display_as("upload_sat_dn","Upload SATS-DN")                                
+                ->display_as("tanggal_sat_dn","SATS-DN")
+                ->display_as("upload_sat_dn","SK Perolehan")                                
                 ;
                              
                 if($this->hakAkses=="user"){                    
@@ -1394,7 +1397,7 @@ public function currencyFormat($value, $row=null){
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
                                 'relate' => 'master_satwa_nama_latin', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                                'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                             )
                         );
                     
@@ -1436,7 +1439,7 @@ public function currencyFormat($value, $row=null){
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
                                 'relate' => 'master_satwa_nama_latin', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                                'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                              )
                         );
                     
@@ -1454,7 +1457,7 @@ public function currencyFormat($value, $row=null){
                     $this->displayCRUD($output);    
 
                 }else{
-                    $crud->display_as("no_identifikasi","No identifikasi satwa");
+                    $crud->display_as("no_identifikasi","No identifikasi satwa satwa");
                     $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");                 
                     $crud->set_relation("lk_asal_informasi_lk_umum_kode_lk", "informasi_lk_umum", "nama_lk");
                     $this->load->library('gc_dependent_select');
@@ -1477,7 +1480,7 @@ public function currencyFormat($value, $row=null){
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
                                 'relate' => 'master_satwa_nama_latin', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                                'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                             )
                         );
                     
@@ -1559,7 +1562,7 @@ public function currencyFormat($value, $row=null){
                                 'title'=>'no_identifikasi',
                                 'id_field' => 'id_individu_satwa', // table of state: primary key
                                 'relate' => 'master_satwa_nama_latin', // table of state:
-                                'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                                'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                                 )
                         );
                         
@@ -1586,7 +1589,7 @@ public function currencyFormat($value, $row=null){
                             'title'=>'no_identifikasi',
                             'id_field' => 'id_individu_satwa', // table of state: primary key
                             'relate' => 'master_satwa_nama_latin', // table of state:
-                            'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                            'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                             )
                     );
                 }
@@ -1610,14 +1613,16 @@ public function currencyFormat($value, $row=null){
                             'title'=>'no_identifikasi',
                             'id_field' => 'id_individu_satwa', // table of state: primary key
                             'relate' => 'master_satwa_nama_latin', // table of state:
-                            'data-placeholder' => 'Pilih no identifikasi satwa' //dropdown's data-placeholder:
+                            'data-placeholder' => 'Pilih no identifikasi satwa satwa' //dropdown's data-placeholder:
                             )
                     );
                                     
                 }
                 $crud->field_type('id_kematian_satwa', 'hidden');
                 $crud->display_as("informasi_lk_umum_id_lk","Nama LK")                
-                ->display_as("master_satwa_nama_latin","Jenis Satwa")     
+                ->display_as("master_satwa_nama_latin","Jenis Satwa") 
+                ->display_as("upload_bap","BAP Kematian") 
+                ->display_as("no_identifikasi_kematian","No Identifikasi Satwa")      
                 ->display_as("master_jenis_kematian_id_jenis_kematian","Penyebab Kematian")             
                 ;
                
@@ -1713,9 +1718,11 @@ public function currencyFormat($value, $row=null){
 
                 //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                
                 $crud->set_relation("master_satwa_nama_latin","master_satwa","{jenis_satwa} - {nama_latin}");                                
-                $crud->set_rules('no_identifikasi','No Identifikasi','required');
-                $crud->display_as("informasi_lk_umum_id_lk","Kode LK")                
+                $crud->set_rules('no_identifikasi','No identifikasi satwa','required');
+                $crud->display_as("informasi_lk_umum_id_lk","Nama Lembaga Konservasi")                
                 ->display_as("master_satwa_nama_latin","Jenis Satwa")  
+                ->display_as("tanggal_lahir","Tanggal Kelahiran Satwa")  
+                ->display_as("cip_tagging","CIP/Tagging")  
                 ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa")              
                 ;
 
@@ -1833,7 +1840,7 @@ public function currencyFormat($value, $row=null){
         }
         public function monitoring_individu_satwa(){
             
-            $req["judul"]="Monitoring Data Individu Satwa";
+            $req["judul"]="Data Individu Satwa";
             $req["url"]=site_url('lemkon/individu_satwa_ctl');
             $req["app"]="lk";
             $req["hak_akses"] = $this->login_model->hakAkses();
@@ -1848,7 +1855,8 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_individu_satwa_new');
-                $crud->display_as("informasi_lk_umum_id_lk","Id LK");
+                $crud->display_as("informasi_lk_umum_id_lk","Nama lembaga Konservasi");
+                $crud->display_as("informasi_lk_umum_id_lk","Nama lembaga Konservasi");
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
                     $crud->field_type('informasi_lk_umum_id_lk', 'hidden', $this->id_lk);
@@ -1915,14 +1923,14 @@ public function currencyFormat($value, $row=null){
 
                 $crud->set_rules('informasi_lk_umum_id_lk','Nama LK','required');
                 $crud->set_rules('master_satwa_nama_latin','Nama Latin','required');
-                $crud->set_rules('no_Identifikasi','No Identifikasi','required');
+                $crud->set_rules('no_Identifikasi','No identifikasi satwa','required');
 
-                $crud->display_as("informasi_lk_umum_id_lk","Kode LK")
+                $crud->display_as("informasi_lk_umum_id_lk","Nama Lembaga Konservasi")
                      ->display_as("master_status_konservasi_satwa_id_status","Status Perlindungan Satwa")
                      ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa")
                      ->display_as("master_satwa_nama_latin","Jenis Satwa","{jenis_satwa} - {nama_latin}")
                      ->display_as("master_jenis_kelamin_id_jenis_kelamin","Jenis Kelamin")
-                     ->display_as("nomer_sk","No SK")
+                     ->display_as("nomer_sk","No SK Perolehan")
                      ;
                                 
                 $output = $crud->render();        
