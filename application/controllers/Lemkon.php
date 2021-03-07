@@ -1833,7 +1833,8 @@ public function currencyFormat($value, $row=null){
             try{
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
-                $crud->set_table('indeks');
+                $crud->set_table('indeks_new');
+                $crud->where('jumlah >=','1');
                 $crud->set_primary_key('jenis_satwa');
                 $crud->unset_operations();            
                 $output = $crud->render();        
