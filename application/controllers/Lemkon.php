@@ -701,17 +701,23 @@ function investasi_callback($post_array) {
         $post_array['id_investasi'] = str_replace("/","_",$post_array['id_investasi']);
     return $post_array;
 }   
-
+public function perolehan_satwa_undo_callback($post_array){
+    $this->load->model("perolehan_satwa_new");
+    $this->load->model("data_individu_satwa_new");//$idIndividu, $idLKTujuan
+    $data =  $this->perolehan_satwa_new->getdata($post_array);
+    if(isset($data[0]->no_identifikasi) && $data[0]->lk_asal_informasi_lk_umum_kode_lk){
+        $this->data_individu_satwa_new->updateLKSatwa($data[0]->no_identifikasi, 
+        $data[0]->lk_asal_informasi_lk_umum_kode_lk);
+    }
+    return true;
+}
 public function perolehan_satwa_callback($post_array){
     $this->load->model("data_individu_satwa_new");//$idIndividu, $idLKTujuan
-    $this->data_individu_satwa->updateLKSatwa($post_array['id_individu_satwa'], 
+
+    $this->data_individu_satwa_new->updateLKSatwa($post_array['no_identifikasi'], 
                                               $post_array['lk_tujuan_informasi_lk_umum_kode_lk']);
-    //if(strlen($post_array['id_perolehan'])<1){
-        $post_array['id_perolehan'] = $post_array['id_individu_satwa']."-".$post_array['tanggal_perolehan'];
-        $post_array['id_perolehan'] = str_replace("/","_",$post_array['id_perolehan']);
-        $post_array['id_perolehan'] = str_replace(" ","-",$post_array['id_perolehan']);
-    //}
-    return $post_array;
+   
+    return true;
 }
 
 public function pelepasliaran_callback($post_array){
@@ -1361,7 +1367,8 @@ public function currencyFormat($value, $row=null){
               
                 $crud->unset_columns("id_perolehan");
                 $crud->field_type('id_perolehan', 'hidden');
-
+                $crud->callback_before_insert(array($this,'perolehan_satwa_callback'));
+                $crud->callback_before_delete(array($this,'perolehan_satwa_undo_callback')); 
                 $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","Asal Lembaga Konservasi")
                 ->display_as("lk_tujuan_informasi_lk_umum_kode_lk","Tujuan Lembaga Konservasi")
                 ->display_as("master_perolehan_id_perolehan","Cara Perolehan")    
@@ -1370,7 +1377,7 @@ public function currencyFormat($value, $row=null){
                 ->display_as("tanggal_sat_dn","SATS-DN")
                 ->display_as("upload_sat_dn","SK Perolehan")                                
                 ;
-                             
+                         
                 if($this->hakAkses=="user"){                    
                     $crud->display_as("no_identifikasi","Nama satwa");        
                     $crud->set_relation("lk_asal_informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk",array('id_lk' => $this->id_lk));       
@@ -1460,8 +1467,9 @@ public function currencyFormat($value, $row=null){
                     $crud->display_as("no_identifikasi","No identifikasi satwa ");
                     $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");                 
                     $crud->set_relation("lk_asal_informasi_lk_umum_kode_lk", "informasi_lk_umum", "nama_lk");
+                   
                     $this->load->library('gc_dependent_select');
-                
+                    $crud->unset_edit(); 
                     $fields = array(
                             'lk_asal_informasi_lk_umum_kode_lk' => array(// first dropdown name
                             'table_name' => 'informasi_lk_umum', // table of country
@@ -1497,7 +1505,7 @@ public function currencyFormat($value, $row=null){
                     $output->output.= $js;
                     $this->displayCRUD($output);
                 }
-
+               
                 }catch(Exception $e){
                     show_error($e->getMessage().' --- '.$e->getTraceAsString());
                 }
@@ -1766,7 +1774,7 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('dinamika_satwa_noniden');
-
+               
                 $crud->field_type('id_satwa_noniden', 'hidden');
 
                 //$crud->set_relation("informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk");
@@ -1834,7 +1842,7 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('indeks_new');
-                $crud->where('jumlah >=','1');
+            
                 $crud->set_primary_key('jenis_satwa');
                 $crud->unset_operations();            
                 $output = $crud->render();        
@@ -1860,7 +1868,6 @@ public function currencyFormat($value, $row=null){
                 $crud=new grocery_CRUD();
                 $crud->set_language("indonesian");          
                 $crud->set_table('data_individu_satwa_new');
-                $crud->display_as("informasi_lk_umum_id_lk","Nama lembaga Konservasi");
                 $crud->display_as("informasi_lk_umum_id_lk","Nama lembaga Konservasi");
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
