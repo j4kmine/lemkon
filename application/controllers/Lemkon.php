@@ -1266,7 +1266,7 @@ public function currencyFormat($value, $row=null){
                 
                 //warningg tambahin where dr LK session
                 
-                $crud->set_relation("id_kawasan","master_kawasan","nama_kawasan");
+                //$crud->set_relation("id_kawasan","master_kawasan","nama_kawasan");
                
                 $crud->set_relation("no_identifikasi","data_individu_satwa_new","no_identifikasi");  
                 $crud->field_type('id_pelepasan', 'hidden');
@@ -1274,6 +1274,7 @@ public function currencyFormat($value, $row=null){
                 
                 $crud->set_field_upload('upload_sk_pelepasan','assets/uploads/lk/fulepas');
                 $crud->display_as("id_kawasan","Kawasan");
+               
                 if($this->hakAkses=="user"){               
                     //$crud->unset_fields("id_lk");
                    $crud->set_relation("lk_asal_informasi_lk_umum_kode_lk","informasi_lk_umum","nama_lk",array('id_lk' => $this->id_lk));
@@ -1295,7 +1296,7 @@ public function currencyFormat($value, $row=null){
                 $crud->display_as("lk_asal_informasi_lk_umum_kode_lk","Nama lembaga Konservasi");
                 $crud->display_as("no_identifikasi","Nomor Identifikasi Satwa");
                 $crud->display_as("master_satwa_nama_latin","Jenis Satwa");
-                $crud->display_as("upload_sk_pelepasan","SK Pelepasliaran");
+                $crud->display_as("upload_sk_pelepasan","SK Pelepasliaran (pdf)");
                 $this->load->library('gc_dependent_select');
                 
                 $fields = array(
@@ -1374,8 +1375,9 @@ public function currencyFormat($value, $row=null){
                 ->display_as("master_perolehan_id_perolehan","Cara Perolehan")    
                 ->display_as("master_satwa_nama_latin","Jenis Satwa") 
                 ->display_as("nomor_stad_din","Nomor SATS-DN")    
-                ->display_as("tanggal_sat_dn","SATS-DN")
-                ->display_as("upload_sat_dn","SK Perolehan")                                
+                ->display_as("tanggal_sat_dn","Tanggal SATS-DN")
+                ->display_as("upload_sat_dn","SATS-DN (pdf)") 
+                ->display_as("upload_sk_peroleh","SK Perolehan (pdf)")                                 
                 ;
                          
                 if($this->hakAkses=="user"){                    
