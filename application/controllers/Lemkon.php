@@ -1736,8 +1736,10 @@ public function currencyFormat($value, $row=null){
                 ->display_as("tanggal_lahir","Tanggal Kelahiran Satwa")  
                 ->display_as("no_identifikasi","Nomor Identifikasi Satwa")  
                 ->display_as("cip_tagging","CIP/Tagging")  
+                ->display_as("upload_bap","BAP Kelahiran (pdf)")  
                 ->display_as("master_jenis_kelamin_id_jenis_kelamin","Jenis Kelamin")  
-                ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa")              
+                ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa") 
+                ->display_as("master_status_konservasi_satwa_id_status","Status Perlindungan Satwa")                           
                 ;
 
                 $crud->set_field_upload('upload_bap','assets/uploads/lk/baplahir');
@@ -1946,6 +1948,9 @@ public function currencyFormat($value, $row=null){
                      ->display_as("master_jenis_kelamin_id_jenis_kelamin","Jenis Kelamin")
                      ->display_as("nomer_sk","No SK Perolehan")
                      ->display_as("cip_tagging","CIP/Tagging")
+                     ->display_as("pdf_upload_sk","SK Perolehan (pdf)")
+                     ->display_as("file_asal_usul_bap","Asal usul BAP (pdf)")
+                     ->display_as("no_identifikasi","Nomor Identifikasi Satwa")
                      ;
                                 
                 $output = $crud->render();        
