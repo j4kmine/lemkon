@@ -1940,7 +1940,17 @@ public function currencyFormat($value, $row=null){
                 $crud->set_rules('informasi_lk_umum_id_lk','Nama LK','required');
                 $crud->set_rules('master_satwa_nama_latin','Nama Latin','required');
                 $crud->set_rules('no_Identifikasi','No identifikasi satwa','required');
-
+                $crud->columns("informasi_lk_umum_id_lk"
+                ,"master_status_hukum_satwa_id_status"
+                ,"master_status_konservasi_satwa_id_status"
+                ,"master_satwa_nama_latin"
+                ,"nama_panggilan_satwa"
+                ,"kondisi_satwa"
+                ,"no_identifikasi"
+                ,"cip_tagging"
+                ,"nomer_sk"
+                ,"pdf_upload_sk"
+                ,"file_asal_usul_bap");
                 $crud->display_as("informasi_lk_umum_id_lk","Nama Lembaga Konservasi")
                      ->display_as("master_status_konservasi_satwa_id_status","Status Perlindungan Satwa")
                      ->display_as("master_status_hukum_satwa_id_status","Status Hukum Satwa")
