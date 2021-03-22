@@ -1951,6 +1951,7 @@ public function currencyFormat($value, $row=null){
                      ->display_as("pdf_upload_sk","SK Perolehan (pdf)")
                      ->display_as("file_asal_usul_bap","Asal usul BAP (pdf)")
                      ->display_as("no_identifikasi","Nomor Identifikasi Satwa")
+                     ->display_as("id_individu_satwa","Nomor Identifikasi")
                      ;
                                 
                 $output = $crud->render();        
