@@ -1727,7 +1727,21 @@ public function currencyFormat($value, $row=null){
                     $crud->set_relation("nama_induk_betina","data_individu_satwa_new","{nama_panggilan_satwa} - {informasi_lk_umum_id_lk}",array('master_jenis_kelamin_id_jenis_kelamin' => 'B'), 'nama_panggilan_satwa ASC');    
                 }
                  $crud->field_type('id_individu_satwa', 'hidden');
-
+                 $crud->columns("informasi_lk_umum_id_lk"
+                 ,"master_status_hukum_satwa_id_status"
+                 ,"master_status_konservasi_satwa_id_status"
+                 ,"master_satwa_nama_latin"
+                 ,"nama_panggilan_satwa"
+                 ,"kondisi_satwa"
+                 ,"no_identifikasi"
+                 ,"cip_tagging"
+                 ,"master_jenis_kelamin_id_jenis_kelamin"
+                 ,"nama_induk_jantan"
+                 ,"nama_induk_betina"
+                 ,"tanggal_lahir"
+                 ,"tanggal_lahir"
+                ,"upload_bap"
+                );
                 //$crud->set_relation("informasi_lk_umum_id_lk","informasi_lk_umum","nama_lk");                
                 $crud->set_relation("master_satwa_nama_latin","master_satwa","{jenis_satwa} - {nama_latin}");                                
                 $crud->set_rules('no_identifikasi','No identifikasi satwa','required');
