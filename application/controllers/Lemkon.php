@@ -1306,7 +1306,7 @@ public function currencyFormat($value, $row=null){
                     'relate' => null, // the first dropdown hasn't a relation
                     ),
                     'master_satwa_nama_latin' => array(// first dropdown name
-                        'table_name' => 'nama_satwa_individu', // table of country
+                        'table_name' => 'nama', // table of country
                         'title' => 'master_satwa_nama_latin', // country title
                         'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                         'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1395,7 +1395,7 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                                'table_name' => 'nama_satwa_individu', // table of country
+                                'table_name' => 'nama', // table of country
                                 'title' => 'master_satwa_nama_latin', // country title
                                 'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                                 'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1437,7 +1437,7 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                                'table_name' => 'nama_satwa_individu', // table of country
+                                'table_name' => 'nama', // table of country
                                 'title' => 'master_satwa_nama_latin', // country title
                                 'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                                 'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1479,7 +1479,7 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                                'table_name' => 'nama_satwa_individu', // table of country
+                                'table_name' => 'nama', // table of country
                                 'title' => 'master_satwa_nama_latin', // country title
                                 'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                                 'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1562,7 +1562,7 @@ public function currencyFormat($value, $row=null){
                                 'relate' => null, // the first dropdown hasn't a relation
                                 ),
                                 'master_satwa_nama_latin' => array(// first dropdown name
-                                'table_name' => 'nama_satwa_individu', // table of country
+                                'table_name' => 'nama', // table of country
                                 'title' => 'master_satwa_nama_latin', // country title
                                 'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                                 'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1589,7 +1589,7 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                            'table_name' => 'nama_satwa_individu', // table of country
+                            'table_name' => 'nama', // table of country
                             'title' => 'master_satwa_nama_latin', // country title
                             'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                             'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
@@ -1613,7 +1613,7 @@ public function currencyFormat($value, $row=null){
                             'relate' => null, // the first dropdown hasn't a relation
                             ),
                             'master_satwa_nama_latin' => array(// first dropdown name
-                            'table_name' => 'nama_satwa_individu', // table of country
+                            'table_name' => 'nama', // table of country
                             'title' => 'master_satwa_nama_latin', // country title
                             'id_field' => 'master_satwa_nama_latin', // table of state: primary key
                             'relate' => 'informasi_lk_umum_id_lk', // the first dropdown hasn't a relation
