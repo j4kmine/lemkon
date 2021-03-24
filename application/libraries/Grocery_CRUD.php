@@ -277,11 +277,11 @@ class grocery_CRUD_Field_Types
 				$value = $this->character_limiter(strip_tags($value),$this->character_limiter,"...");
 			break;
 			case 'date':
-				if(!empty($value) && $value != '0000-00-00' && $value != '1970-01-01')
+				if(isset($value) && !empty($value) && $value != '0000-00-00' && $value != '1970-01-01')
 				{
 					list($year,$month,$day) = explode("-",$value);
 
-					$value = date($this->php_date_format, mktime (0, 0, 0, (int)$month , (int)$day , (int)$year));
+					$value = date("Y-m-d", mktime (0, 0, 0, (int)$month , (int)$day , (int)$year));
 				}
 				else
 				{
